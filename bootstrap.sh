@@ -27,3 +27,5 @@ conda install -y jupyter_dashboards -c conda-forge
 pip install plotly --upgrade                  #this installs plotly v2.0.6
 #conda install -y -c conda-forge pyspark       #needed for jupyter to talk to pyspark
 #conda install -y -c conda-forge -y awscli
+
+echo 'bootstrap.sh done!'

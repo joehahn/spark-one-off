@@ -26,15 +26,17 @@ aws s3 cp piggyback.sh "s3://$bucket_name/scripts/piggyback.sh" --profile "$prof
 
 #upload this repo to s3...I rather that the provision_datasci script clone this repo,
 #but i couldn't resolve ssh issues...
-tar --exclude='../spark-one-off/private' --exclude='../spark-one-off/.git' \
-    -zcvf /tmp/spark-one-off.tar.gz ../spark-one-off &> /dev/null
+cd ..
+tar --exclude='spark-one-off/private' --exclude='spark-one-off/.git' \
+    -zcvf /tmp/spark-one-off.tar.gz spark-one-off &> /dev/null
 aws s3 cp /tmp/spark-one-off.tar.gz "s3://$bucket_name/spark-one-off.tar.gz" --profile "$profile_str"
+cd spark-one-off
 
 #select hadoop applications to be installed
 applications='Name=Hadoop Name=Spark'
 
 #set ec2_attributes
-ec2_attributes='{"KeyName":"datasci","InstanceProfile":"EMR_EC2_DefaultRole","SubnetId":"subnet-de8a0485","EmrManagedSlaveSecurityGroup":"sg-373ca44d","EmrManagedMasterSecurityGroup":"sg-303fa74a"}'
+ec2_attributes='{"KeyName":"datasci","InstanceProfile":"EMR_EC2_DefaultRole","SubnetId":"subnet-087c7641"}'
 
 #set instance_groups
 #m3.xlarge costs $6.38/day=$190/month

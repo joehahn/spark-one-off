@@ -36,17 +36,17 @@ Then configure aws-cli by adding the following lines to ~/.aws/config on your la
 
 and note the ClusterID that will resemble
 
-        ClusterId=j-12A979CHXVDTV
+        ClusterId=j-AKTMQU8L2IJU
 
 
 and browse the cluster's EMR dashboard at
 
-        https://us-west-2.console.aws.amazon.com/elasticmapreduce/home?region=us-west-2#cluster-details:j-12A979CHXVDTV
+        https://us-west-2.console.aws.amazon.com/elasticmapreduce/home?region=us-west-2#cluster-details:j-AKTMQU8L2IJU
 
 
 and use that plus the EC2 console to infer the master node's public IP, which will resemble:
 
-        master=54.202.180.228
+        master=54.186.248.28
 
 
 All cluster instances are named oneoff in the AWS/EC2 console.
@@ -93,7 +93,7 @@ These logs are also stored in s3 at
 on the tflow-demo instance; use the EC2 console to get that machine's
 public IP then browse
 
-        http://54.202.180.228:8765
+        http://54.186.248.28:8765
 
 
 Note that this Jupyter UI is password-protected but visible to the world,
@@ -138,9 +138,12 @@ for now...
 
 8 To terminate this cluster using laptop's aws-cli:
 
-        aws emr terminate-clusters --cluster-ids $ClusterId --profile tflow-demo
+        aws emr terminate-clusters --cluster-ids $ClusterId --profile oneoff
 
 
 After the cluster is terminated then it is safe to delete the s3 bucket:
 
         aws s3 rb s3://spark-one-off --force --profile oneoff
+
+
+and use AWS > Athena > Catalog Manager > drop the oneoff database.
