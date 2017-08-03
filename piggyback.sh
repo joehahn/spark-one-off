@@ -31,7 +31,11 @@ logj4="spark.driver.extraJavaOptions=-Dlog4j.configuration=file:./log4j.properti
 #this copies hdfs output to s3 and then plops an athena table schema on that data
 #./make_athena_tables.sh
 
-#do the following as user=jupyter: prep and start jupyter inside of a screen session
+#create user jupyter
+echo "creating user jupyter..."
+sudo adduser jupyter
+
+#prep & start jupyter inside of a screen session, as user=jupyter
 #jupyter's password=oneoff, see https://jupyter-notebook.readthedocs.io/en/stable/public_server.html
 echo 'starting jupyter...'
 sudo -u jupyter /emr/miniconda2/bin/jupyter notebook --generate-config

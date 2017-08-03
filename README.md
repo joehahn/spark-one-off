@@ -36,17 +36,17 @@ Then configure aws-cli by adding the following lines to ~/.aws/config on your la
 
 and note the ClusterID that will resemble
 
-        ClusterId=j-1LG4CBI5YQBCO
+        ClusterId=j-1CBQP83AMNTSV
 
 
 and browse the cluster's EMR dashboard at
 
-        https://us-west-2.console.aws.amazon.com/elasticmapreduce/home?region=us-west-2#cluster-details:j-1LG4CBI5YQBCO
+        https://us-west-2.console.aws.amazon.com/elasticmapreduce/home?region=us-west-2#cluster-details:j-1CBQP83AMNTSV
 
 
 and use that plus the EC2 console to infer the master node's public IP, which will resemble:
 
-        master=54.186.23.62
+        master=54.191.248.181
 
 
 All cluster instances are named oneoff in the AWS/EC2 console.
@@ -96,7 +96,7 @@ jupyter can also save its notebooks in this directory:
 on the master instance; use the EC2 console to get that machine's
 public IP then browse
 
-        http://54.186.23.62:8765
+        http://54.191.248.181:8765
 
 
 Note that this Jupyter UI is password-protected but visible to the world,

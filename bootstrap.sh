@@ -16,11 +16,6 @@ echo 'installing locate...'
 sudo yum install -y mlocate
 sudo updatedb
 
-#add user jupyter that will own the jupyter UI
-newuser=jupyter
-echo "creating user $newuser"
-sudo adduser $newuser
-
 #install minicoda plus other python libraries
 echo 'installing anaconda...'
 wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
