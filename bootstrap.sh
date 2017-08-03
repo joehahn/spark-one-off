@@ -7,12 +7,22 @@
 
 echo 'running bootstrap.sh...'
 
+#install git
+echo 'installing git...'
+sudo yum install -y git-all
+
+#install and setup locate
+echo 'installing locate...'
+sudo yum install -y mlocate
+sudo updatedb
+
 #add user jupyter that will own the jupyter UI
 newuser=jupyter
 echo "creating user $newuser"
 sudo adduser $newuser
 
 #install minicoda plus other python libraries
+echo 'installing anaconda...'
 wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
 chmod +x ./Miniconda2-latest-Linux-x86_64.sh
 ./Miniconda2-latest-Linux-x86_64.sh -b -p /emr/miniconda2
