@@ -39,12 +39,13 @@ logj4="spark.driver.extraJavaOptions=-Dlog4j.configuration=file:./log4j.properti
 #this copies hdfs output to s3 and then plops an athena table schema on that data
 #./make_athena_tables.sh
 
-##setup & start jupyter inside screen session, see https://jupyter-notebook.readthedocs.io/en/stable/public_server.html
-##jupyter's password=mlp
-#export PATH=/emr/miniconda2/bin:$PATH
-#jupyter notebook --generate-config
-#cp jupyter_notebook_config.json /home/hadoop/.jupyter/.
-#screen -dmS jupyter_sesh jupyter notebook --ip 0.0.0.0 --no-browser --port 8765
+#become user=jupyter, and then prep and start jupyter inside of a screen session
+#jupyter's password=mlp, see https://jupyter-notebook.readthedocs.io/en/stable/public_server.html
+sudo su jupyter
+/emr/miniconda2/bin/jupyter notebook --generate-config
+cp jupyter_notebook_config.json /home/$USER/.jupyter/.
+screen -dmS jupyter_sesh /emr/miniconda2/bin/jupyter notebook --ip 0.0.0.0 --no-browser --port 8765
+exit
 
 #done
 echo 'piggyback.sh done!'
