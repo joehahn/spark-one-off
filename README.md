@@ -36,17 +36,17 @@ Then configure aws-cli by adding the following lines to ~/.aws/config on your la
 
 and note the ClusterID that will resemble
 
-        ClusterId=j-AKTMQU8L2IJU
+        ClusterId=j-1LG4CBI5YQBCO
 
 
 and browse the cluster's EMR dashboard at
 
-        https://us-west-2.console.aws.amazon.com/elasticmapreduce/home?region=us-west-2#cluster-details:j-AKTMQU8L2IJU
+        https://us-west-2.console.aws.amazon.com/elasticmapreduce/home?region=us-west-2#cluster-details:j-1LG4CBI5YQBCO
 
 
 and use that plus the EC2 console to infer the master node's public IP, which will resemble:
 
-        master=54.186.248.28
+        master=54.186.23.62
 
 
 All cluster instances are named oneoff in the AWS/EC2 console.
@@ -76,13 +76,15 @@ These logs are also stored in s3 at
         mlp-demo/elasticmapreduce/$ClusterId/steps/s-something
 
 
-5 To clone and push to this repo on master:
+5 To clone and push to this repo on master, with permissions adjusted so that 
+jupyter can also save its notebooks in this directory:
 
         git config --global user.email "jmh.datasciences@gmail.com"
         git config --global user.name "joehahn"
         git clone https://github.com/joehahn/spark-one-off.git
         chmod 777 spark-one-off
         cd spark-one-off
+        chmod 777 *.ipynb
 
 
 6 To regenerate the simulated data:
@@ -91,10 +93,10 @@ These logs are also stored in s3 at
 
 
 7 The Jupyter dashboard is running inside a screen session
-on the tflow-demo instance; use the EC2 console to get that machine's
+on the master instance; use the EC2 console to get that machine's
 public IP then browse
 
-        http://54.186.248.28:8765
+        http://54.186.23.62:8765
 
 
 Note that this Jupyter UI is password-protected but visible to the world,

@@ -10,15 +10,6 @@ echo 'running piggyback.sh...'
 echo $(whoami)
 echo $(pwd)
 
-#install git
-echo 'installing git...'
-sudo yum install -y git-all
-
-#install and setup locate
-echo 'installing locate...'
-sudo yum install -y mlocate
-sudo updatedb
-
 #unpack the spark-one-off repo, with permissions set so that user=jupyter
 #can read & write notebooks to this directory
 echo 'installing spark-one-off...'
@@ -40,13 +31,12 @@ logj4="spark.driver.extraJavaOptions=-Dlog4j.configuration=file:./log4j.properti
 #this copies hdfs output to s3 and then plops an athena table schema on that data
 #./make_athena_tables.sh
 
-#become user=jupyter, and then prep and start jupyter inside of a screen session
-#jupyter's password=mlp, see https://jupyter-notebook.readthedocs.io/en/stable/public_server.html
-sudo su jupyter
-/emr/miniconda2/bin/jupyter notebook --generate-config
-cp jupyter_notebook_config.json /home/$USER/.jupyter/.
-screen -dmS jupyter_sesh /emr/miniconda2/bin/jupyter notebook --ip 0.0.0.0 --no-browser --port 8765
-exit
+#do the following as user=jupyter: prep and start jupyter inside of a screen session
+#jupyter's password=oneoff, see https://jupyter-notebook.readthedocs.io/en/stable/public_server.html
+echo 'starting jupyter...'
+sudo -u jupyter /emr/miniconda2/bin/jupyter notebook --generate-config
+sudo -u jupyter cp jupyter_notebook_config.json /home/jupyter/.jupyter/.
+sudo -u jupyter screen -dmS jupyter_sesh /emr/miniconda2/bin/jupyter notebook --ip 0.0.0.0 --no-browser --port 8765
 
 #done
 echo 'piggyback.sh done!'
