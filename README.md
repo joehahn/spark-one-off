@@ -36,17 +36,17 @@ Then configure aws-cli by adding the following lines to ~/.aws/config on your la
 
 and note the ClusterID that will resemble
 
-        ClusterId=j-18XD7MUS5YDVE
+        ClusterId=j-12A979CHXVDTV
 
 
 and browse the cluster's EMR dashboard at
 
-        https://us-west-2.console.aws.amazon.com/elasticmapreduce/home?region=us-west-2#cluster-details:j-18XD7MUS5YDVE
+        https://us-west-2.console.aws.amazon.com/elasticmapreduce/home?region=us-west-2#cluster-details:j-12A979CHXVDTV
 
 
 and use that plus the EC2 console to infer the master node's public IP, which will resemble:
 
-        master=54.213.130.47
+        master=54.202.180.228
 
 
 All cluster instances are named oneoff in the AWS/EC2 console.
@@ -78,7 +78,9 @@ These logs are also stored in s3 at
 
 5 To clone and push to this repo on master:
 
-        git clone git@github.com:joehahn/spark-one-off.git
+        git config --global user.email "jmh.datasciences@gmail.com"
+        git config --global user.name "joehahn"
+        git clone https://github.com/joehahn/spark-one-off.git
         cd spark-one-off
 
 
@@ -91,7 +93,7 @@ These logs are also stored in s3 at
 on the tflow-demo instance; use the EC2 console to get that machine's
 public IP then browse
 
-        http://54.202.101.40:8765
+        http://54.202.180.228:8765
 
 
 Note that this Jupyter UI is password-protected but visible to the world,
@@ -104,15 +106,13 @@ and having that user launch the Jupyter dashboards.
 10 To construct the launch_cluster.sh script, first build the EMR cluster manually via
 AWS console > EMR > Advanced options using these settings:
 
-    Advanced options > click hadoop spark
+    Advanced options
     release=emr-5.7.0
-    create vpc:
+    create vpc > with single public subnet:
         vpc name=spark-one-off
-        VPC ID=vpc-1fa00679 | spark-one-off
-        Subnet ID=subnet-de8a0485 | Public subnet
-    instance type=m4.2xlarge
-    3 core instances
-    cluster name=mlpdemo
+        VPC ID=vpc-b78721d1 | spark-one-off
+        Subnet ID=subnet-087c7641 | Public subnet
+    cluster name=spark-one-off
     logging s3 folder=s3://spark-one-off/elasticmapreduce/
     no termination protection
     scale down: terminate at task completion
@@ -132,8 +132,8 @@ and then add this rule to the same security group:
 
 
 to allow anyone to browse the cluster's password-protected Jupyter UI from anywhere.
-Opening port 8765 like this probably isn't good practice, but is good enuf for demo
-work.
+Opening port 8765 like this probably isn't best practice, but will have to be good enuf
+for now...
 
 
 8 To terminate this cluster using laptop's aws-cli:
