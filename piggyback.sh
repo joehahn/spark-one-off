@@ -20,7 +20,7 @@ sudo yum install -y mlocate
 sudo updatedb
 
 #unpack the spark-one-off repo, with permissions set so that user=jupyter
-#can write notebooks to this directory
+#can read & write notebooks to this directory
 echo 'installing spark-one-off...'
 bucket_name="spark-one-off"
 aws s3 cp s3://$bucket_name/spark-one-off.tar.gz /home/hadoop/.
@@ -29,6 +29,7 @@ gunzip --force spark-one-off.tar.gz
 tar -xvf spark-one-off.tar
 chmod 777 spark-one-off
 cd spark-one-off
+chmod 777 *.ipynb
 
 #copy data from s3 to hdfs
 

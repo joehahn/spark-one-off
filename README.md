@@ -81,6 +81,7 @@ These logs are also stored in s3 at
         git config --global user.email "jmh.datasciences@gmail.com"
         git config --global user.name "joehahn"
         git clone https://github.com/joehahn/spark-one-off.git
+        chmod 777 spark-one-off
         cd spark-one-off
 
 
