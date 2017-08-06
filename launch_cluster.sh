@@ -32,8 +32,8 @@ tar --exclude='spark-one-off/private' --exclude='spark-one-off/.git' \
 aws s3 cp /tmp/spark-one-off.tar.gz "s3://$bucket_name/spark-one-off.tar.gz" --profile "$profile_str"
 cd spark-one-off
 
-#select hadoop applications to be installed
-applications='Name=Hadoop Name=Spark'
+#select hadoop applications to be installed, with Hive's beeline used to make athena tables
+applications='Name=Hadoop Name=Spark Name=Hive'
 
 #set ec2_attributes
 ec2_attributes='{"KeyName":"datasci","InstanceProfile":"EMR_EC2_DefaultRole","SubnetId":"subnet-087c7641"}'

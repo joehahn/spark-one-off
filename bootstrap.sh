@@ -1,3 +1,5 @@
+#!/bin/bash 
+
 #bootstrap.sh
 #
 #by Joe Hahn, jmh.datasciences@gmail.com, 3 August 2017.
