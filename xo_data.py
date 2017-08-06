@@ -30,19 +30,15 @@ def make_xo_data(N_dots, initial_id, x_half_width, radius, box_half_width, jitte
     idx_not = df['class'] == 'B'
     
     #class scores
-    df.loc[idx_x, 'score_X'] = 1.0
-    df.loc[idx_x, 'score_O'] = 0.0
-    df.loc[idx_x, 'score_B'] = 0.0
-    df.loc[idx_o, 'score_X'] = 0.0
-    df.loc[idx_o, 'score_O'] = 1.0
-    df.loc[idx_o, 'score_B'] = 0.0
-    df.loc[idx_not, 'score_X'] = 0.0
-    df.loc[idx_not, 'score_O'] = 0.0
-    df.loc[idx_not, 'score_B'] = 1.0
-    
-    #add gaussian jitter to dots' (x,y) positions:
-    df['x'] += np.random.normal(scale=jitter, size=N_dots)
-    df['y'] += np.random.normal(scale=jitter, size=N_dots)
+    df.loc[idx_x, 'Xscore'] = 1.0
+    df.loc[idx_x, 'Oscore'] = 0.0
+    df.loc[idx_x, 'Bscore'] = 0.0
+    df.loc[idx_o, 'Xscore'] = 0.0
+    df.loc[idx_o, 'Oscore'] = 1.0
+    df.loc[idx_o, 'Bscore'] = 0.0
+    df.loc[idx_not, 'Xscore'] = 0.0
+    df.loc[idx_not, 'Oscore'] = 0.0
+    df.loc[idx_not, 'Bscore'] = 1.0
 
     #rotate coordinate system by 45 degrees = pi/4 radians
     phi = np.pi/4.0
@@ -50,14 +46,18 @@ def make_xo_data(N_dots, initial_id, x_half_width, radius, box_half_width, jitte
     s = np.sin(phi)
     df['xr'] =  df.x*c + df.y*s
     df['yr'] = -df.x*s + df.y*c
-        
+    
+    #add gaussian noise/jitter to dots' (x,y) positions:
+    df['xrn'] = df.xr + np.random.normal(scale=jitter, size=N_dots)
+    df['yrn'] = df.yr + np.random.normal(scale=jitter, size=N_dots)
+    
     #add a column of random numbers 
     df['ran_num'] = np.random.uniform(size=N_dots)
     if (debug):
         print df.head(5)
     
     #return selected columns
-    cols = ['id', 'ran_num', 'class', 'score_X', 'score_O', 'score_B', 'xr', 'yr']
+    cols = ['id', 'ran_num', 'class', 'score_X', 'score_O', 'score_B', 'xr', 'yr', 'xrn', 'yrn']
     df_select = df[cols]
     if (debug):
         print df_select.head(5)
