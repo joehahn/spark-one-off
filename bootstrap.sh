@@ -28,10 +28,12 @@ conda install -y ipython
 conda install -y scipy
 conda install -y pandas
 conda install -y matplotlib
+conda install -y seaborn
 conda install -y scikit-learn
 conda install -y jupyter
 conda install -y jupyter_dashboards -c conda-forge
 pip install plotly --upgrade                  #this installs plotly v2.0.6
+pip install PyAthenaJDBC
 #conda install -y -c conda-forge pyspark       #needed for jupyter to talk to pyspark
 #conda install -y -c conda-forge -y awscli
 
