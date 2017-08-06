@@ -22,7 +22,13 @@ chmod 777 spark-one-off
 cd spark-one-off
 chmod 777 *.ipynb
 
-#copy data from s3 to hdfs
+#create training data
+/emr/miniconda2/bin/python ./make_training_data.py
+
+#copy training data to hdfs and s3
+hdfs dfs -mkdir -p data
+hdfs dfs -put -f data/train.txt data/train.txt
+aws s3 cp data/train.txt s3://spark-one-off/data/train/train.txt
 
 #execute spark job
 logj4="spark.driver.extraJavaOptions=-Dlog4j.configuration=file:./log4j.properties"
