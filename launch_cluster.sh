@@ -24,6 +24,9 @@ aws s3 cp bootstrap.sh "s3://$bucket_name/scripts/bootstrap.sh" --profile "$prof
 #copy piggyback script to s3
 aws s3 cp piggyback.sh "s3://$bucket_name/scripts/piggyback.sh" --profile "$profile_str"
 
+#copy aws access keys to s3, they will be needed by athena
+aws s3 cp private/accessKeys.csv "s3://$bucket_name/accessKeys.csv" --profile "$profile_str"
+
 #upload this repo to s3...I rather that the provision_datasci script clone this repo,
 #but i couldn't resolve ssh issues...
 cd ..
@@ -33,7 +36,7 @@ aws s3 cp /tmp/spark-one-off.tar.gz "s3://$bucket_name/spark-one-off.tar.gz" --p
 cd spark-one-off
 
 #select hadoop applications to be installed, with Hive's beeline used to make athena tables
-applications='Name=Hadoop Name=Spark Name=Hive'
+applications='Name=Hadoop Name=Spark'
 
 #set ec2_attributes
 ec2_attributes='{"KeyName":"datasci","InstanceProfile":"EMR_EC2_DefaultRole","SubnetId":"subnet-087c7641"}'

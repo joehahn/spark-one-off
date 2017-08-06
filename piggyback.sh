@@ -26,8 +26,8 @@ chmod 777 *.ipynb
 /emr/miniconda2/bin/python ./make_training_data.py
 
 #copy training data to hdfs and s3
-hdfs dfs -mkdir -p data
-hdfs dfs -put -f data/train.txt data/train.txt
+hdfs dfs -mkdir -p data/train
+hdfs dfs -put -f data/train.txt data/train/train.txt
 aws s3 cp data/train.txt s3://spark-one-off/data/train/train.txt
 
 #execute spark job
