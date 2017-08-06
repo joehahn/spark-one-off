@@ -42,5 +42,9 @@ sudo -u jupyter /emr/miniconda2/bin/jupyter notebook --generate-config
 sudo -u jupyter cp jupyter_notebook_config.json /home/jupyter/.jupyter/.
 sudo -u jupyter screen -dmS jupyter_sesh /emr/miniconda2/bin/jupyter notebook --ip 0.0.0.0 --no-browser --port 8765
 
+#update locate's database
+echo 'updating locate...'
+sudo updatedb
+
 #done
 echo 'piggyback.sh done!'
