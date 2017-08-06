@@ -57,7 +57,7 @@ def make_xo_data(N_dots, initial_id, x_half_width, radius, box_half_width, jitte
         print df.head(5)
     
     #return selected columns
-    cols = ['id', 'ran_num', 'class', 'score_X', 'score_O', 'score_B', 'xr', 'yr', 'xrn', 'yrn']
+    cols = ['id', 'ran_num', 'class', 'Xscore', 'Oscore', 'Bscore', 'xr', 'yr', 'xrn', 'yrn']
     df_select = df[cols]
     if (debug):
         print df_select.head(5)
