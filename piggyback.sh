@@ -34,8 +34,8 @@ aws s3 cp data/train.txt s3://spark-one-off/data/train/train.txt
 logj4="spark.driver.extraJavaOptions=-Dlog4j.configuration=file:./log4j.properties"
 #spark-submit --master yarn --conf "$logj4" mlp.py
 
-#this copies hdfs output to s3 and then plops an athena table schema on that data
-#./make_athena_tables.sh
+##plop athena table schemas on s3 data
+#./athena_tables.sh
 
 #create user jupyter
 echo "creating user jupyter..."
