@@ -29,8 +29,10 @@ echo "JDBC connection string:"
 echo $connect_str
 /usr/lib/spark/bin/beeline -u "$connect_str" -e "show databases"
 
-#create athena table
+#create athena database
 query_str="drop table if exists oneoff.train"
+/usr/lib/spark/bin/beeline -u "$connect_str" -e "$query_str"
+query_str="drop table if exists oneoff.grid"
 /usr/lib/spark/bin/beeline -u "$connect_str" -e "$query_str"
 query_str="drop database if exists oneoff"
 /usr/lib/spark/bin/beeline -u "$connect_str" -e "$query_str"
@@ -38,6 +40,8 @@ query_str="create database oneoff"
 /usr/lib/spark/bin/beeline -u "$connect_str" -e "$query_str"
 query_str="show databases"
 /usr/lib/spark/bin/beeline -u "$connect_str" -e "show databases"
+
+#create train table
 query_str="""
     create external table oneoff.train (
             id int, ran_num double, class string, Xscore double, Oscore double, Bscore double, 
@@ -47,13 +51,26 @@ query_str="""
         location 's3://spark-one-off/data/train'
 """
 /usr/lib/spark/bin/beeline -u "$connect_str" -e "$query_str"
-
-#check table
 query_str="select * from oneoff.train limit 5"
 /usr/lib/spark/bin/beeline -u "$connect_str" -e "$query_str"
-query_str="select count(*) from oneoff.train"
+query_str="select count(*) as N from oneoff.train"
 /usr/lib/spark/bin/beeline -u "$connect_str" -e "$query_str"
-hdfs dfs -cat data/train/train.txt | wc
+hdfs dfs -cat data/train/*.txt | wc
+
+#create grid table
+query_str="""
+    create external table oneoff.grid (
+            x double, y double, class_pred string
+        ) row format delimited
+        fields terminated by '|'
+        location 's3://spark-one-off/data/grid'
+"""
+/usr/lib/spark/bin/beeline -u "$connect_str" -e "$query_str"
+query_str="select * from oneoff.grid limit 5"
+/usr/lib/spark/bin/beeline -u "$connect_str" -e "$query_str"
+query_str="select count(*) as N from oneoff.grid"
+/usr/lib/spark/bin/beeline -u "$connect_str" -e "$query_str"
+hdfs dfs -cat data/grid/*.csv | wc
 
 #done
-echo 'make_athena_tables.sh done.'
+echo 'athena_tables.sh done!'
