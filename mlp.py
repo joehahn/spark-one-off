@@ -128,9 +128,9 @@ grid_class.show(10)
 print 'writing predictions to hdfs...'
 cols = ['x', 'y', 'class_pred']
 grid_write = grid_class.select(cols)
-print 'number of records in grid = ', grid_write.count()
 print grid_write.dtypes
 print grid_write.show(10)
 grid_write.write.csv('data/grid', mode='overwrite', sep='|', header='false')
 import os
 os.system('hdfs dfs -ls data/grid')
+print 'number of records in grid = ', grid_write.count()

@@ -38,8 +38,9 @@ echo 'copying hdfs data to s3...'
 aws s3 rm --recursive s3://spark-one-off/data
 hadoop distcp data s3a://spark-one-off/data
 aws s3 ls --recursive s3://spark-one-off/data
+hdfs dfs -cat data/grid/*.csv | wc
 
-#plop athena table schemas on s3 data
+#plop athena table schemas on s3 datasets
 ./athena_tables.sh
 
 #create user jupyter
