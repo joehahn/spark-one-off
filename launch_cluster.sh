@@ -35,7 +35,8 @@ tar --exclude='spark-one-off/private' --exclude='spark-one-off/.git' \
 aws s3 cp /tmp/spark-one-off.tar.gz "s3://$bucket_name/spark-one-off.tar.gz" --profile "$profile_str"
 cd spark-one-off
 
-#select hadoop applications to be installed, with Hive's beeline used to make athena tables
+#select hadoop applications to be installed
+#noting that spark also provides beeline that will be used to talk to athena
 applications='Name=Hadoop Name=Spark'
 
 #set ec2_attributes
@@ -44,6 +45,8 @@ ec2_attributes='{"KeyName":"datasci","InstanceProfile":"EMR_EC2_DefaultRole","Su
 #set instance_groups
 #m3.xlarge costs $6.38/day=$190/month
 #m4.2xlarge costs $10.34/day=$310/month
+#using EMR bumps cost up by 23%
+#athena and s3 charges are negligible
 instance_groups='[{"InstanceCount":1,"InstanceGroupType":"MASTER","InstanceType":"m3.xlarge","Name":"Master - 1"},{"InstanceCount":2,"InstanceGroupType":"CORE","InstanceType":"m3.xlarge","Name":"Core - 2"}]'
 
 #launch the cluster...change to --no-auto-terminate to persist the cluster
