@@ -76,7 +76,8 @@ print 'number of classes = ', N_classes
 #this should be adjusted to avoid under/over fitting
 #N_hidden = 5 #underfitted
 #N_hidden = 15 #ok
-N_hidden = 50 #?
+#N_hidden = 50 #good
+N_hidden = 150 #?
 
 #specify number of neurons in each layer 
 layers = [N_features, N_hidden, N_classes]
