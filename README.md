@@ -103,6 +103,12 @@ jupyter can also save its notebooks in this directory:
         PYSPARK_PYTHON=/emr/miniconda2/bin/python spark-submit --master yarn --conf "$logj4" mlp.py
 
 
+8 To export input & output data to s3:
+
+        aws s3 rm --recursive s3://spark-one-off/data
+        hadoop distcp data s3a://spark-one-off/data
+
+
 7 To rebuild the athena tables:
 
         ./athena_tables.sh
