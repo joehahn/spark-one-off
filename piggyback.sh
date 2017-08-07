@@ -22,21 +22,22 @@ chmod 777 spark-one-off
 cd spark-one-off
 chmod 777 *.ipynb
 
-#create training data
+#create training data and store in hdfs
 echo 'generating training data...'
 echo "working directory = $(pwd)"
 /emr/miniconda2/bin/python ./make_training_data.py
-
-#copy training data to hdfs and s3
-echo 'exporting training data to hdfs and s3...'
-echo "working directory = $(pwd)"
 hdfs dfs -mkdir -p data/train
 hdfs dfs -put -f data/train.txt data/train/train.txt
-aws s3 cp data/train.txt s3://spark-one-off/data/train/train.txt
 
-#execute spark job
+#use spark to fit mlp model to training data, and map the model's decision surface
 logj4="spark.driver.extraJavaOptions=-Dlog4j.configuration=file:./log4j.properties"
-#spark-submit --master yarn --conf "$logj4" mlp.py
+PYSPARK_PYTHON=/emr/miniconda2/bin/python spark-submit --master yarn --conf "$logj4" mlp.py
+
+#copy hdfs input & output data to s3
+echo 'copying hdfs data to s3...'
+aws s3 rm --recursive s3://spark-one-off/data
+hadoop distcp data s3a://spark-one-off/data
+aws s3 ls --recursive s3://spark-one-off/data
 
 #plop athena table schemas on s3 data
 ./athena_tables.sh

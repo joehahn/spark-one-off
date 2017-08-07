@@ -97,6 +97,12 @@ jupyter can also save its notebooks in this directory:
         /emr/miniconda2/bin/python ./make_training_data.py
 
 
+7 To train MLP model on the XO dataset, and to map its decision surface:
+
+        logj4="spark.driver.extraJavaOptions=-Dlog4j.configuration=file:./log4j.properties"
+        PYSPARK_PYTHON=/emr/miniconda2/bin/python spark-submit --master yarn --conf "$logj4" mlp.py
+
+
 7 To rebuild the athena tables:
 
         ./athena_tables.sh
