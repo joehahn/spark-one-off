@@ -32,13 +32,13 @@ hdfs dfs -put -f data/train.txt data/train/train.txt
 #use spark to fit mlp model to training data, and map that model's decision surface
 logj4="spark.driver.extraJavaOptions=-Dlog4j.configuration=file:./log4j.properties"
 PYSPARK_PYTHON=/emr/miniconda2/bin/python spark-submit --master yarn --conf "$logj4" mlp.py
+hdfs dfs -cat data/grid/*.csv | wc
 
 #copy hdfs input & output data to s3
 echo 'copying hdfs data to s3...'
 aws s3 rm --recursive s3://spark-one-off/data
 hadoop distcp data s3a://spark-one-off/data
 aws s3 ls --recursive s3://spark-one-off/data
-hdfs dfs -cat data/grid/*.csv | wc
 
 #plop athena table schemas on s3 datasets
 ./athena_tables.sh
