@@ -7,6 +7,11 @@ git branch=master
 
 ###Intro:
 
+To view Jupyter browse
+
+        http://54.186.238.247:8765
+
+
 ###Technical Notes:
 
 The following notes will be useful to those wishing to dig deeper:
