@@ -29,7 +29,7 @@ echo "working directory = $(pwd)"
 hdfs dfs -mkdir -p data/train
 hdfs dfs -put -f data/train.txt data/train/train.txt
 
-#use spark to fit mlp model to training data, and map the model's decision surface
+#use spark to fit mlp model to training data, and map that model's decision surface
 logj4="spark.driver.extraJavaOptions=-Dlog4j.configuration=file:./log4j.properties"
 PYSPARK_PYTHON=/emr/miniconda2/bin/python spark-submit --master yarn --conf "$logj4" mlp.py
 

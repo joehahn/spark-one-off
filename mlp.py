@@ -133,4 +133,5 @@ print grid_write.show(10)
 grid_write.write.csv('data/grid', mode='overwrite', sep='|', header='false')
 import os
 os.system('hdfs dfs -ls data/grid')
-print 'number of records in grid = ', grid_write.count()
+N_grid = grid_write.count()
+print 'number of records in grid = ', N_grid
