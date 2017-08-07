@@ -45,7 +45,3 @@ import pandas as pd
 pd.set_option('display.expand_frame_repr', False)
 print train.head(5)
 train.to_csv('data/train.txt', sep='|', index=False, header=False)
-
-
-
-

@@ -36,17 +36,17 @@ Then configure aws-cli by adding the following lines to ~/.aws/config on your la
 
 and note the ClusterID that will resemble
 
-        ClusterId=j-1K9NEQU3T2HJ3
+        ClusterId=j-3T4VX2EIEM65Q
 
 
 and browse the cluster's EMR dashboard at
 
-        https://us-west-2.console.aws.amazon.com/elasticmapreduce/home?region=us-west-2#cluster-details:j-1K9NEQU3T2HJ3
+        https://us-west-2.console.aws.amazon.com/elasticmapreduce/home?region=us-west-2#cluster-details:j-3T4VX2EIEM65Q
 
 
 and use that plus the EC2 console to infer the master node's public IP, which will resemble:
 
-        master=54.214.115.238
+        master=54.186.238.247
 
 
 All cluster instances are named oneoff in the AWS/EC2 console.
@@ -87,16 +87,24 @@ jupyter can also save its notebooks in this directory:
         chmod 777 *.ipynb
 
 
-6 To regenerate the simulated data:
+6 To regenerate the training data:
 
-        /emr/miniconda2/bin/python ./tflow_demo.py
+        /emr/miniconda2/bin/python ./make_training_data.py
+
+
+7 To rebuild the athena tables:
+
+        ./athena_tables.sh
+
+
+8 To ...
 
 
 7 The Jupyter dashboard is running inside a screen session
 on the master instance; use the EC2 console to get that machine's
 public IP then browse
 
-        http://54.214.115.238:8765
+        http://54.186.238.247:8765
 
 
 Note that this Jupyter UI is password-protected but visible to the world,

@@ -23,9 +23,13 @@ cd spark-one-off
 chmod 777 *.ipynb
 
 #create training data
+echo 'generating training data...'
+echo "working directory = $(pwd)"
 /emr/miniconda2/bin/python ./make_training_data.py
 
 #copy training data to hdfs and s3
+echo 'exporting training data to hdfs and s3...'
+echo "working directory = $(pwd)"
 hdfs dfs -mkdir -p data/train
 hdfs dfs -put -f data/train.txt data/train/train.txt
 aws s3 cp data/train.txt s3://spark-one-off/data/train/train.txt
@@ -34,8 +38,8 @@ aws s3 cp data/train.txt s3://spark-one-off/data/train/train.txt
 logj4="spark.driver.extraJavaOptions=-Dlog4j.configuration=file:./log4j.properties"
 #spark-submit --master yarn --conf "$logj4" mlp.py
 
-##plop athena table schemas on s3 data
-#./athena_tables.sh
+#plop athena table schemas on s3 data
+./athena_tables.sh
 
 #create user jupyter
 echo "creating user jupyter..."
