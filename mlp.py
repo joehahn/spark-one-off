@@ -23,7 +23,7 @@ time_start = time.time()
 
 #create SparkSession
 from pyspark.sql import SparkSession
-spark = SparkSession.builder.appName('train_model').getOrCreate()
+spark = SparkSession.builder.appName('mlp').getOrCreate()
 
 #read training data into spark dataframe
 print 'reading training data...'
@@ -80,7 +80,7 @@ classes.show()
 print 'number of classes = ', N_classes
 
 #noting that too-low values tend to result in underfitting
-N_hidden = [7, 30, 150, 1000]
+N_hidden = [7, 20, 60, 200, 1000]
 
 #loop over N_hidden
 from pyspark.ml.classification import MultilayerPerceptronClassifier

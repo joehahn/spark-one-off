@@ -26,6 +26,7 @@ chmod 777 *.ipynb
 echo 'generating training data...'
 echo "working directory = $(pwd)"
 /emr/miniconda2/bin/python ./make_training_data.py
+hdfs dfs -rm -R -f -skipTrash data
 hdfs dfs -mkdir -p data/train
 hdfs dfs -put -f data/train.txt data/train/train.txt
 

@@ -116,7 +116,22 @@ jupyter can also save its notebooks in this directory:
         ./athena_tables.sh
 
 
-8 To ...
+8 To view any of the cluster's UIs, first establish an ssh tunnel into the master node:
+
+        ssh -i private/datasci.pem hadoop@$master -CD 8157
+
+
+Also install the SwitchyOmega extension in chrome and configure per 
+https://www.cloudera.com/documentation/director/2-2-x/topics/director_security_socks.html
+with the contents of pac.script copied into the PAC Script box
+
+
+9 While the mlp.py spark job is executing, you can monitor that job by
+browsing Yarn's resource manager on port 8088 of the master's private IP,
+which will resemble:
+
+        http://10.0.0.110:8088
+
 
 
 7 The Jupyter dashboard is running inside a screen session
