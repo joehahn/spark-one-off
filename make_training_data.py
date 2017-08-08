@@ -9,7 +9,7 @@
 #to execute:    /emr/miniconda2/bin/python ./make_training_data.py
 
 #number of dots in training dataset
-N_train = 12000
+N_train = 10000
 
 #half-thickness of the x
 x_half_width = 0.5
@@ -21,7 +21,7 @@ radius = 3.5
 box_half_width = 7.1
 
 #set jitter=scale of the gaussian noise, to make the class boundaries slightly fuzzy
-jitter = 0.4
+jitter = 0.45
 
 #set seed for random number generator
 rn_seed = 13

@@ -9,7 +9,7 @@ git branch=master
 
 To view Jupyter browse
 
-        http://54.213.236.136:8765
+        http://34.210.87.217:8765
 
 
 ###Technical Notes:
@@ -41,17 +41,17 @@ Then configure aws-cli by adding the following lines to ~/.aws/config on your la
 
 and note the ClusterID that will resemble
 
-        ClusterId=j-LFB62557SKQQ
+        ClusterId=j-IKHXYNLUU7E7
 
 
 and browse the cluster's EMR dashboard at
 
-        https://us-west-2.console.aws.amazon.com/elasticmapreduce/home?region=us-west-2#cluster-details:j-LFB62557SKQQ
+        https://us-west-2.console.aws.amazon.com/elasticmapreduce/home?region=us-west-2#cluster-details:j-IKHXYNLUU7E7
 
 
 and use that plus the EC2 console to infer the master node's public IP, which will resemble:
 
-        master=54.213.236.136
+        master=34.210.87.217
 
 
 All cluster instances are named oneoff in the AWS/EC2 console.
@@ -130,7 +130,7 @@ with the contents of pac.script copied into the PAC Script box
 browsing Yarn's resource manager on port 8088 of the master's private IP,
 which will resemble:
 
-        http://10.0.0.110:8088
+        http://10.0.0.31:8088
 
 
 
@@ -138,7 +138,7 @@ which will resemble:
 on the master instance; use the EC2 console to get that machine's
 public IP then browse
 
-        http://54.213.236.136:8765
+        http://34.210.87.217:8765
 
 
 Note that this Jupyter UI is password-protected but visible to the world,
