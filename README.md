@@ -9,7 +9,7 @@ git branch=master
 
 To view Jupyter browse
 
-        http://54.186.238.247:8765
+        http://54.213.236.136:8765
 
 
 ###Technical Notes:
@@ -41,17 +41,17 @@ Then configure aws-cli by adding the following lines to ~/.aws/config on your la
 
 and note the ClusterID that will resemble
 
-        ClusterId=j-3T4VX2EIEM65Q
+        ClusterId=j-LFB62557SKQQ
 
 
 and browse the cluster's EMR dashboard at
 
-        https://us-west-2.console.aws.amazon.com/elasticmapreduce/home?region=us-west-2#cluster-details:j-3T4VX2EIEM65Q
+        https://us-west-2.console.aws.amazon.com/elasticmapreduce/home?region=us-west-2#cluster-details:j-LFB62557SKQQ
 
 
 and use that plus the EC2 console to infer the master node's public IP, which will resemble:
 
-        master=54.186.238.247
+        master=54.213.236.136
 
 
 All cluster instances are named oneoff in the AWS/EC2 console.
@@ -121,7 +121,7 @@ jupyter can also save its notebooks in this directory:
 on the master instance; use the EC2 console to get that machine's
 public IP then browse
 
-        http://54.186.238.247:8765
+        http://54.213.236.136:8765
 
 
 Note that this Jupyter UI is password-protected but visible to the world,
