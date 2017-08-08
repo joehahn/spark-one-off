@@ -92,9 +92,11 @@ jupyter can also save its notebooks in this directory:
         chmod 777 *.ipynb
 
 
-6 To regenerate the training data:
+6 To regenerate the training data and store in hdfs:
 
         /emr/miniconda2/bin/python ./make_training_data.py
+        hdfs dfs -mkdir -p data/train
+        hdfs dfs -put -f data/train.txt data/train/train.txt
 
 
 7 To train MLP model on the XO dataset, and to map its decision surface:

@@ -60,7 +60,7 @@ hdfs dfs -cat data/train/*.txt | wc
 #create grid table
 query_str="""
     create external table oneoff.grid (
-            x double, y double, class_pred string
+            x double, y double, class_pred string, N_hidden int
         ) row format delimited
         fields terminated by '|'
         location 's3://spark-one-off/data/grid'

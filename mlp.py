@@ -62,6 +62,13 @@ train_class.show(10)
 feature_cols = ['x', 'y']
 N_features = len(feature_cols)
 
+#assemble features into a column of feature-vectors plus a target column
+print 'assembling features vectors...'
+from pyspark.ml.feature import VectorAssembler
+assembler = VectorAssembler(inputCols=feature_cols, outputCol='features')
+train_assembled = assembler.transform(train_class)
+train_assembled.show(5, truncate=False)
+
 #target column that is to be predicted
 target_col = 'class_num'
 
@@ -79,63 +86,66 @@ print 'number of classes = ', N_classes
 #N_hidden = 50 #good
 N_hidden = 100 #?
 #N_hidden = 150 #very good
+N_hidden = [5, 10, 100, 300]
 
-#specify number of neurons in each layer 
-layers = [N_features, N_hidden, N_classes]
-print 'layers = ', layers
-
-#assemble features into a column of feature-vectors plus a target column
-print 'assembling features vectors...'
-from pyspark.ml.feature import VectorAssembler
-assembler = VectorAssembler(inputCols=feature_cols, outputCol='features')
-train_assembled = assembler.transform(train_class)
-train_assembled.show(5, truncate=False)
-
-#train a MultilayerPerceptronClassifier
-print 'training MLP model...'
+#loop over N_hidden
 from pyspark.ml.classification import MultilayerPerceptronClassifier
-mlp = MultilayerPerceptronClassifier(maxIter=100, layers=layers, seed=rn_seed, labelCol=target_col, \
-    featuresCol='features')
-model = mlp.fit(train_assembled)
-
-#create a grid of (x,y) points, for mapping the model's decision surface
-print 'generating grid for mapping prediction boundaries...'
-xy_max = 5.0
-delta = 0.1#0.05
 import numpy as np
-xy_axis = np.arange(-xy_max, xy_max + delta, delta)
-Nxy = len(xy_axis)
-id = np.arange(Nxy**2)
 import pandas as pd
-grid_pd = pd.DataFrame(id, columns=['id'])
-grid_pd['y_idx'] = grid_pd['id']//Nxy
-grid_pd['x_idx'] = grid_pd['id'] - grid_pd['y_idx']*Nxy
-grid_pd['y'] = (grid_pd['y_idx'] - Nxy/2)*delta
-grid_pd['x'] = (grid_pd['x_idx'] - Nxy/2)*delta
-grid = spark.createDataFrame(grid_pd[['x', 'y']])
-grid.show(5)
-
-#generate predictions across the grid
-print 'computing predictions across grid...'
-grid_assembled = assembler.transform(grid)
-grid_assembled.show(5, truncate=False)
-grid_predict = model.transform(grid_assembled)
-grid_predict.show(5, truncate=False)
-
-#convert numerical predictions into X,O,B
-num2class = when(grid_predict['prediction'] == 0.0, 'X')\
-    .otherwise(when(grid_predict['prediction'] == 1.0, 'O').otherwise('B'))
-grid_class = grid_predict.withColumn('class_pred', num2class)
-grid_class.show(10)
-
-#write predictions to hdfs
-print 'writing predictions to hdfs...'
-cols = ['x', 'y', 'class_pred']
-grid_write = grid_class.select(cols)
-print grid_write.dtypes
-print grid_write.show(10)
-grid_write.write.csv('data/grid', mode='overwrite', sep='|', header='false')
+from pyspark.sql.functions import lit
 import os
-os.system('hdfs dfs -ls data/grid')
-N_grid = grid_write.count()
-print 'number of records in grid = ', N_grid
+os.system('hdfs dfs -rm -R -f -skipTrash data/grid')
+os.system('hdfs dfs -mkdir data/grid')
+for N_hid in N_hidden:
+    
+    #specify number of neurons in each layer 
+    layers = [N_features, N_hid, N_classes]
+    print 'layers = ', layers
+    
+    #train a MultilayerPerceptronClassifier
+    print 'training MLP model...'
+    mlp = MultilayerPerceptronClassifier(maxIter=100, layers=layers, seed=rn_seed, \
+        labelCol=target_col, featuresCol='features')
+    model = mlp.fit(train_assembled)
+    
+    #create a grid of (x,y) points, for mapping the model's decision surface
+    print 'generating grid for mapping prediction boundaries...'
+    xy_max = 5.0
+    delta = 0.1#0.05
+    xy_axis = np.arange(-xy_max, xy_max + delta, delta)
+    Nxy = len(xy_axis)
+    id = np.arange(Nxy**2)
+    grid_pd = pd.DataFrame(id, columns=['id'])
+    grid_pd['y_idx'] = grid_pd['id']//Nxy
+    grid_pd['x_idx'] = grid_pd['id'] - grid_pd['y_idx']*Nxy
+    grid_pd['y'] = (grid_pd['y_idx'] - Nxy/2)*delta
+    grid_pd['x'] = (grid_pd['x_idx'] - Nxy/2)*delta
+    grid = spark.createDataFrame(grid_pd[['x', 'y']])
+    
+    #generate predictions across the grid
+    print 'computing predictions across grid...'
+    grid_assembled = assembler.transform(grid)
+    grid_assembled.show(5, truncate=False)
+    grid_predict = model.transform(grid_assembled)
+    grid_predict.show(5, truncate=False)
+    
+    #convert numerical predictions into X,O,B
+    num2class = when(grid_predict['prediction'] == 0.0, 'X')\
+        .otherwise(when(grid_predict['prediction'] == 1.0, 'O').otherwise('B'))
+    grid_class = grid_predict.withColumn('class_pred', num2class)
+    
+    #add N_hid column
+    grid_nhid = grid_class.withColumn('N_hidden', lit(N_hid))
+    grid_nhid.show(10)
+    
+    #write predictions to hdfs
+    print 'writing predictions to hdfs...'
+    cols = ['x', 'y', 'class_pred', 'N_hidden']
+    grid_write = grid_nhid.select(cols)
+    print grid_write.dtypes
+    print grid_write.show(10)
+    grid_write.write.csv('data/grid', mode='append', sep='|', header='false')
+    os.system('hdfs dfs -ls data/grid')
+    N_grid = grid_write.count()
+    print 'number of records in grid = ', N_grid
+    os.system('hdfs dfs -cat data/grid/*.csv | wc')
