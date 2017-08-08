@@ -34,7 +34,7 @@ hdfs dfs -put -f data/train.txt data/train/train.txt
 echo 'executing mlp.py...'
 logj4="spark.driver.extraJavaOptions=-Dlog4j.configuration=file:./log4j.properties"
 PYSPARK_PYTHON=/emr/miniconda2/bin/python spark-submit --master yarn --conf "$logj4" \
-    --num-executors 31 --executor-cores 4 --executor-memory 4G --driver-memory 4G mlp.py
+    --num-executors 31 --executor-cores 4 --executor-memory 4G --driver-memory 2G mlp.py
 hdfs dfs -cat data/grid/*.csv | wc
 
 #copy hdfs input & output data to s3
