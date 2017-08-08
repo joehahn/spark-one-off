@@ -143,3 +143,9 @@ for N_hid in N_hidden:
     N_grid = grid_write.count()
     print 'number of records in grid = ', N_grid
     os.system('hdfs dfs -cat data/grid/*.csv | wc')
+
+
+#done!
+time_stop = time.time()
+print 'execution time (minutes) = ', (time_stop - time_start)/60.0
+print 'mlp.py done!'
