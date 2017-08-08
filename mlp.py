@@ -80,7 +80,7 @@ classes.show()
 print 'number of classes = ', N_classes
 
 #noting that too-low values tend to result in underfitting
-N_hidden = [7, 15, 30, 100]
+N_hidden = [7, 30, 150, 1000]
 
 #loop over N_hidden
 from pyspark.ml.classification import MultilayerPerceptronClassifier
