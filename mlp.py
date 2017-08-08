@@ -81,7 +81,7 @@ print 'number of classes = ', N_classes
 
 #a list of all values of N_hidden to be used here, where N_hidden=number of neurons
 #in the model's hidden layer. Note that too-low values result in underfitting
-N_hidden = [5, 7, 10, 20, 50, 100, 150, 200, 400, 600]
+N_hidden = [5, 7, 10, 30, 50, 75, 100, 200, 400, 600]
 
 #loop over all MLP models having various values of N_hidden
 from pyspark.ml.classification import MultilayerPerceptronClassifier
@@ -140,7 +140,7 @@ for N_hid in N_hidden:
     print grid_write.dtypes
     print grid_write.show(10)
     grid_write.write.csv('data/grid', mode='append', sep='|', header='false')
-    os.system('hdfs dfs -ls data/grid')
+    #os.system('hdfs dfs -ls data/grid')
     N_grid = grid_write.count()
     print 'number of records in grid = ', N_grid
     os.system('hdfs dfs -cat data/grid/*.csv | wc')
