@@ -81,8 +81,9 @@ print 'number of classes = ', N_classes
 
 #noting that too-low values tend to result in underfitting
 N_hidden = [7, 10, 20, 40, 60, 80, 100, 150, 200, 400, 1000]
+N_hidden = [700]
 
-#loop over N_hidden
+#loop over all MLP models having various values of N_hidden
 from pyspark.ml.classification import MultilayerPerceptronClassifier
 import numpy as np
 import pandas as pd

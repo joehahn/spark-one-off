@@ -33,7 +33,8 @@ hdfs dfs -put -f data/train.txt data/train/train.txt
 #use spark to fit mlp model to training data, and map that model's decision surface
 echo 'executing mlp.py...'
 logj4="spark.driver.extraJavaOptions=-Dlog4j.configuration=file:./log4j.properties"
-PYSPARK_PYTHON=/emr/miniconda2/bin/python spark-submit --master yarn --conf "$logj4" mlp.py
+PYSPARK_PYTHON=/emr/miniconda2/bin/python spark-submit --master yarn --conf "$logj4" \
+    --num-executors 15 --executor-cores 4 --executor-memory 3G --driver-memory 3G mlp.py
 hdfs dfs -cat data/grid/*.csv | wc
 
 #copy hdfs input & output data to s3
