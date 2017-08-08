@@ -7,9 +7,12 @@ git branch=master
 
 ###Intro:
 
-To view Jupyter browse
+Browse the Jupyter dashboard at
 
-        http://34.210.87.217:8765
+        http://34.210.87.217:8765/notebooks/dashboard.ipynb?dashboard
+
+
+with password=oneoff
 
 
 ###Technical Notes:

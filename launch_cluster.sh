@@ -43,11 +43,11 @@ applications='Name=Hadoop Name=Spark'
 ec2_attributes='{"KeyName":"datasci","InstanceProfile":"EMR_EC2_DefaultRole","SubnetId":"subnet-087c7641"}'
 
 #set instance_groups
-#m3.xlarge costs $6.38/day=$190/month
-#m4.2xlarge costs $10.34/day=$310/month
+#m3.xlarge (4cpu & 15Gb) costs $6.38/day=$190/month
+#m4.2xlarge (8cpu & 32Gb) costs $10.34/day=$310/month
 #using EMR bumps cost up by 23%
 #athena and s3 charges are negligible
-instance_groups='[{"InstanceCount":1,"InstanceGroupType":"MASTER","InstanceType":"m3.xlarge","Name":"Master - 1"},{"InstanceCount":4,"InstanceGroupType":"CORE","InstanceType":"m3.xlarge","Name":"Core - 2"}]'
+instance_groups='[{"InstanceCount":1,"InstanceGroupType":"MASTER","InstanceType":"m4.2xlarge","Name":"Master - 1"},{"InstanceCount":4,"InstanceGroupType":"CORE","InstanceType":"m4.2xlarge","Name":"Core - 2"}]'
 
 #launch the cluster...change to --no-auto-terminate to persist the cluster
 aws emr create-cluster \
