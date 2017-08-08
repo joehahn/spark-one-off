@@ -79,14 +79,8 @@ N_classes = classes.count()
 classes.show()
 print 'number of classes = ', N_classes
 
-#set number of neurons in the neural net's only hidden layer,
-#this should be adjusted to avoid under/over fitting
-#N_hidden = 5 #very underfitted
-#N_hidden = 15 #ok
-#N_hidden = 50 #good
-N_hidden = 100 #?
-#N_hidden = 150 #very good
-N_hidden = [5, 10, 100, 300]
+#noting that too-low values tend to result in underfitting
+N_hidden = [7, 15, 30, 100]
 
 #loop over N_hidden
 from pyspark.ml.classification import MultilayerPerceptronClassifier
