@@ -21,7 +21,7 @@ radius = 3.5
 box_half_width = 7.1
 
 #set jitter=scale of the gaussian noise, to make the class boundaries slightly fuzzy
-jitter = 0.45
+jitter = 0.4
 
 #set seed for random number generator
 rn_seed = 13
