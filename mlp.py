@@ -101,7 +101,7 @@ model = mlp.fit(train_assembled)
 #create a grid of (x,y) points, for mapping the model's decision surface
 print 'generating grid for mapping prediction boundaries...'
 xy_max = 5.0
-delta = 0.05
+delta = 0.1#0.05
 import numpy as np
 xy_axis = np.arange(-xy_max, xy_max + delta, delta)
 Nxy = len(xy_axis)
