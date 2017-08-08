@@ -81,7 +81,7 @@ print 'number of classes = ', N_classes
 
 #a list of all values of N_hidden to be used here, where N_hidden=number of neurons
 #in the model's hidden layer. Note that too-low values result in underfitting
-N_hidden = [7, 10, 20, 50, 100, 150, 200, 400, 600, 1000]
+N_hidden = [7, 10, 20, 50, 100, 150, 200, 400, 700, 1000]
 
 #loop over all MLP models having various values of N_hidden
 from pyspark.ml.classification import MultilayerPerceptronClassifier
