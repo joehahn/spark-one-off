@@ -50,15 +50,12 @@ log in using password=oneoff.
 
 ### Spark Job:
 
-This repo's main goal is to template the workflow described above: have Spark perform
+This repo's main goal is to template the workflow just described: have Spark perform
 a computation on an EMR cluster and export its output to S3 where it is later
-be queried and visualized by a Jupyter dashboard. Having the EMR cluster terminate after
-the spark job completes, with its output stored in S3, also keeps compute costs very low.
-
-This line in the piggyback script generates the mock XO dataset:
+be queried and visualized by a Jupyter dashboard. This line in the piggyback script
+generates the mock XO dataset:
 
         /emr/miniconda2/bin/python ./make_training_data.py
-
 
 which also labels each record in the XO dataset as a member of the green X,
 red O, or blue B background classes, depending upon where each record's x,y coordinates
