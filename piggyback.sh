@@ -12,7 +12,7 @@ echo $(pwd)
 
 #unpack the spark-one-off repo, with permissions set so that user=jupyter
 #can read & write notebooks to this directory
-echo 'installing spark-one-off...'
+echo 'installing spark-one-off repo...'
 bucket_name="spark-one-off"
 aws s3 cp s3://$bucket_name/spark-one-off.tar.gz /home/hadoop/.
 cd /home/hadoop
@@ -48,29 +48,29 @@ aws s3 ls --recursive s3://spark-one-off/data
 echo "getting aws access keys from s3..."
 mkdir private
 aws s3 cp s3://spark-one-off/accessKeys.csv private/accessKeys.csv
-IFS=, read -r access_key secret_key < <(tail -n1 private/accessKeys.csv)
-#echo $access_key
-#echo $secret_key
-secret_key_encoded="$(echo $secret_key | sed 's/\//\\\//g')"
-#echo $secret_key_encoded
 
 #plop athena table schemas on s3 datasets
 ./athena_tables.sh
 
-#create user jupyter
-echo "creating user jupyter..."
-sudo adduser jupyter
-
-#prep & start jupyter inside of a screen session, as user=jupyter
-#jupyter's password=oneoff, see https://jupyter-notebook.readthedocs.io/en/stable/public_server.html
-echo 'starting jupyter...'
-sudo -u jupyter /emr/miniconda2/bin/jupyter notebook --generate-config
-sudo -u jupyter cp jupyter_notebook_config.json /home/jupyter/.jupyter/.
-sudo -u jupyter screen -dmS jupyter_sesh /emr/miniconda2/bin/jupyter notebook --ip 0.0.0.0 --no-browser --port 8765
+##uncomment to run jupyter dashboard on master node
+##create user jupyter
+#echo "creating user jupyter..."
+#sudo adduser jupyter
+#
+##prep & start jupyter inside of a screen session, as user=jupyter
+##jupyter's password=oneoff, see https://jupyter-notebook.readthedocs.io/en/stable/public_server.html
+#echo 'starting jupyter...'
+#sudo -u jupyter /emr/miniconda2/bin/jupyter notebook --generate-config
+#sudo -u jupyter cp jupyter_notebook_config.json /home/jupyter/.jupyter/.
+#sudo -u jupyter screen -dmS jupyter_sesh /emr/miniconda2/bin/jupyter notebook --ip 0.0.0.0 --no-browser --port 8765
 
 #update locates database
 echo 'updating locate...'
 sudo updatedb
+
+#sleep for 30 minutes, then cluster terminates
+echo 'piggyback sleeping for 30 minutes...'
+sleep 1800
 
 #done
 echo 'piggyback.sh done!'

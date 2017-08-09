@@ -68,8 +68,8 @@ aws emr create-cluster \
     --region "$aws_region" \
     --bootstrap-action Path="s3://$bucket_name/scripts/bootstrap.sh" \
     --steps Type=CUSTOM_JAR,Name=CustomJAR,ActionOnFailure=CONTINUE,Jar=s3://$aws_region.elasticmapreduce/libs/script-runner/script-runner.jar,Args=["s3://$bucket_name/scripts/piggyback.sh"] \
-    --no-auto-terminate \
+    --auto-terminate \
     --no-termination-protected
 
 #launch the datascience instance
-#./launch_datasci.sh
+./launch_datasci.sh

@@ -199,3 +199,16 @@ After the cluster is terminated then it is safe to delete the s3 bucket:
 
 
 and use AWS > Athena > Catalog Manager > drop the oneoff database.
+
+
+###Known Issues:
+
+1 To launch the datasci instance, the aws-cli command "aws emr create-cluster" is used to create
+a single-node emr cluster. For convenience only, since that easily gets the bootstrap and
+provision_datasci scripts executed on the datasci node. The downside is the additional EMR charge
+of about $2/hour. The preferred way to launch is via the "aws ec2 run-instances" command,
+which will avoid the EMR charge. But that is not used here since I don't know how to tell
+this new instance how to use the desired subnet and security groups and execute additional scripts.
+I'm sure the above is straightforward, but I don't know how to do such...
+
+2.
