@@ -83,7 +83,8 @@ is the optimal number of neurons in the MLP model's hidden layer.
 
 ![](https://github.com/joehahn/spark-one-off/blob/master/figs/decision_surface.png)
 
-### Requiremments:
+
+### Requirements:
 
 Launching the EMR cluster will require the following:
 
@@ -109,18 +110,15 @@ on your laptop):
 
     conda install -c conda-forge -y awscli
 
-
 Then configure aws-cli by adding the following lines to ~/.aws/config on your laptop:
 
     [profile oneoff]
     region = us-west-2
 
-
 (keeping in mind that athena is not available in all AWS regions). Then tell aws-cli to use your aws access keys:
 
     cat private/accessKeys.csv
     aws configure --profile oneoff
-
 
 2 Launch the EMR Hadoop cluster by executing the following on your laptop: 
 
