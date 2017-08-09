@@ -8,12 +8,60 @@ git branch=master
 ###Intro:
 
 
-Browse the Jupyter dashboard at
+The following uses a suite of bash and python scripts to launch a throwaway EMR cluster
+in the Amazon AWS cloud. And once that cluster is up and ready, a Spark computation is then
+executed in parallel across that cluster's worker nodes. When that Spark job is complete,
+its output is stored in S3, and then the EMR cluster terminates. And while this is happening,
+a persistent datascience instance is also launched in AWS, that datascience instance
+will host and Jupyter dashboard that will use the Athena service to query that S3 data
+and visualize those queries. The architecture diagram (below) shows how all of these
+AWS components interact:
 
-        http://54.202.254.48:8765/notebooks/dashboard.ipynb?dashboard
+(architecture diagram)
+
+To launch this cluster, first confirm that you satisfy the Requirements that are noted below,
+and then execute this launch script
+
+        ./launch_cluster.sh
+
+which in 20 minutes will: launch the EMR cluster and the datasci instance, install various libraries,
+execute the Spark job on the EMR cluster, export output to S3, and launch a Jupyter dashboard that
+will visualize that output.
+
+To browse that Jupyter dashboard, first use the AWS EC2 console to determine the public IP
+address and then browse
+
+        http://54.202.212.90:8765/notebooks/dashboard.ipynb?dashboard
 
 
-with password=oneoff
+keeping in mind that you will need to update the IP address in the above URL, and then
+log in using password=oneoff.
+
+
+###Spark Job:
+
+This repo's main goal is to template the workflow described above: have Spark perform
+a computation on an EMR cluster and export its output to S3 where it is later
+be queried and visualized by a Jupyter dashboard. Having the EMR cluster terminate after
+the spark job completes, and storing output in S3, also keeps compute costs very low.
+
+This line in the piggyback script generates the mock XO dataset:
+
+        /emr/miniconda2/bin/python ./make_training_data.py
+
+
+which also labels each record in the XO dataset as a member of the green X,
+red O, or blue B background classes, depending upon where each record's x,y coordinates
+reside, see dashboard. This training dataset is then stored in HDFS,
+and then the pyspark code mlp.py trains a Multi Layer Perceptron (MLP) classifier
+on that data. An MLP model is a fairly simple neural network model, and the
+quality of its predictions depends on the number of neurons that are used
+in the model's hidden layer. To explore this, the mlp.py code actually fits
+10 different neural nets to the training data, these models have 5 < N < 600
+in their neural networks. To determine the optimal number
+of neurons N, the mlp.py code uses these trained MLP classifiers'
+to map their predicted decision boundaries, and the dashboard shows that N=30
+is the optimal number of neurons in the hidden layer.
 
 
 ###Requiremments:
@@ -31,6 +79,7 @@ Your AWS access keys should be stored in file private/accessKeys.csv
 
 Note that after the following successfully executes once, only a browser is needed
 to view this demoo's dashboards.
+
 
 
 ###Technical Notes:
