@@ -180,7 +180,7 @@ provision_datasci setting up the jupyter dashboard, check its logs via
 
         tail -f /mnt/var/log/hadoop/steps/s-*/stdout
 
-9 User=jupyter owners the Jupyter session that is running inside a screen session
+9 User=jupyter owns the Jupyter session that is running inside a screen session
 on the datasci instance. Use the EC2 console to get that machine's
 public IP and then browse
 
