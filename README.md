@@ -9,11 +9,11 @@ git branch=master
 
 
 The following uses a suite of bash and python scripts to launch a throwaway EMR cluster
-in the Amazon AWS cloud. And once that cluster is up and ready, a Spark computation is then
+in the Amazon AWS cloud. And once that cluster is up and ready, a Spark job is then
 executed in parallel across that cluster's worker nodes. When that Spark job is complete,
 its output is stored in S3, and then the EMR cluster terminates. And while this is happening,
 a persistent datascience instance is also launched in AWS, that datascience instance
-will host and Jupyter dashboard that will use the Athena service to query that S3 data
+hosts a Jupyter dashboard that uses the Athena service to query that S3 data
 and visualize those queries. The architecture diagram (below) shows how all of these
 AWS components interact:
 
@@ -24,17 +24,17 @@ and then execute this launch script
 
         ./launch_cluster.sh
 
-which in 20 minutes will: launch the EMR cluster and the datasci instance, install various libraries,
-execute the Spark job on the EMR cluster, export output to S3, and launch a Jupyter dashboard that
-will visualize that output.
+which in 20 minutes will: launch the EMR cluster and the datasci instance, install various libraries
+there, execute the Spark job on the EMR cluster, export output to S3, and launch a Jupyter dashboard that
+visualizes that output.
 
 To browse that Jupyter dashboard, first use the AWS EC2 console to determine the public IP
-address and then browse
+address of the datasci instance and then browse
 
         http://54.202.212.90:8765/notebooks/dashboard.ipynb?dashboard
 
 
-keeping in mind that you will need to update the IP address in the above URL, and then
+keeping in mind that you will need to update the IP address in the above URL, and
 log in using password=oneoff.
 
 
