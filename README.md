@@ -45,7 +45,13 @@ address of the datasci instance and then browse
         http://54.202.212.90:8765/notebooks/dashboard.ipynb?dashboard
 
 keeping in mind that you will need to update the IP address in the above URL, and
-log in using password=oneoff.
+log in using password=oneoff. On first visit, refresh that dashboard via
+
+        Kernel > Restart & Run All
+
+Refreshing those dashboard plots does unfortunately take about a minute to complete. The bottleneck
+appears to be the PyAthenaJDBC library that is used by the dashboard; replacing that library
+with more efficient code will presumably speed up that dashboard's refresh rate. 
 
 
 ### Spark Job:
