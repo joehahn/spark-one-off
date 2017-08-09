@@ -71,22 +71,21 @@ Launching the EMR cluster will require the following:
 - You have access to an AWS account with sufficient permission to launch EC2 instances,
 write data to S3, and execute Athena queries.
 
-- The following presumes that all other confidential info (ssh and aws keys etc) are
+- The following presumes that all other confidential info (ssh and aws keys etc) is
 stored locally on your laptop in the private folder and not pushed to this github repo.
 Your AWS access keys should be stored in file private/accessKeys.csv
 
 - Anaconda python and aws-cli are installed and configured on your laptop per Notes #1, below.
 
 Note that after the following successfully executes once, only a browser is needed
-to view this demoo's dashboards.
-
+to view the dashboard.
 
 
 ### Technical Notes:
 
 The following notes will be useful to those wishing to dig deeper:
 
-1 To install and configure awscli on your laptop (this assumes you have installed anaconda or minicondo
+1 To install and configure awscli on your laptop (this assumes you have installed anaconda or miniconda
 on your laptop):
 
     conda install -c conda-forge -y awscli
@@ -163,7 +162,7 @@ terminates, so if you need to ssh into the master node to debug any issues, you 
 
 
 7 Meanwhile, the launch_cluster script also calls launch_datasci which launches the 
-persistent datasci instance that will host the jupyter dashboard. Use the AWS console to get
+persistent datasci instance that hosts the jupyter dashboard. Use the AWS console to get
 its public IP and ssh into datasci:
 
         datasciIP=54.202.212.90
@@ -177,8 +176,8 @@ provision_datasci setting up the jupyter dashboard, check its logs via
 
 
 9 User=jupyter owners the Jupyter session that is running inside a screen session
-on the datasci instance; use the EC2 console to get that machine's
-public IP then browse
+on the datasci instance. Use the EC2 console to get that machine's
+public IP and then browse
 
         http://54.202.212.90:8765
 
@@ -207,7 +206,7 @@ jupyter can also save its notebooks in a directory owned by user=hadoop:
         hdfs dfs -put -f data/train.txt data/train/train.txt
 
 
-12 To train MLP model on the XO dataset, and to map its decision surface, on master:
+12 To train MLP model on the XO dataset & map its decision surface, on master:
 
         logj4="spark.driver.extraJavaOptions=-Dlog4j.configuration=file:./log4j.properties"
         PYSPARK_PYTHON=/emr/miniconda2/bin/python spark-submit --master yarn --conf "$logj4" \
@@ -245,10 +244,8 @@ which will resemble:
 
 
 Note that this Jupyter UI is password-protected but visible to the world,
-and this process is owned by user=hadoop who has sudo privledges. Not good practice for
-production work, but is ok enuf for a demo running on a throwaway
-instance. Doing this properly likely requires creating a non-sudo'able user
-and having that user launch the Jupyter dashboards.
+and this process is owned by user=jupyter who does not have sudo privledges. Not good practice for
+production work, but is ok for a demo running on a throwaway instance.
 
 
 17 To construct the launch_cluster.sh script, first build the EMR cluster manually via
@@ -280,7 +277,7 @@ and then add this rule to the same security group:
 
 
 to allow anyone to browse the cluster's password-protected Jupyter UI from anywhere.
-Opening port 8765 like this probably isn't best practice, but will have to be good enuf
+Opening port 8765 to the world is not best practice, but will have to be good enuf
 for now...
 
 
