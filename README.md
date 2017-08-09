@@ -144,7 +144,7 @@ then Running (where the Spark code mlp.py is executed in parallel across the clu
 this is the code that fits the predictive neural network model to the mock data),
 then Terminating (here the cluster is automatically shut down after the output is stored in S3).
 
-If you want this cluster to persist rather than terminate, change --auto-terminate in
+If you want the EMR cluster to persist rather than terminate, change --auto-terminate in
 launch_cluster.sh to --no-auto-terminate
 
 3 Then ssh into the master node as user=hadoop:
