@@ -147,16 +147,13 @@ then Terminating (here the cluster is automatically shut down after demo output 
 If you want this cluster to persist rather than terminate, change --auto-terminate in
 launch_cluster.sh to --no-auto-terminate
 
-
 3 Then ssh into the master node as user=hadoop:
 
         ssh -i private/datasci.pem hadoop@$masterIP
 
-
 4 When the EMR dashboard reports that the cluster is Bootstrapping, the cluster is executing
 the bootstrap script on all oneoff instances, and then it installs Hadoop across this cluster,
 this takes about 8 minutes to complete.
-
 
 5 And when the EMR cluster is Running, it is executing the piggyback script on the master node,
 that script launches the spark job mlp.py that is this cluster's main purpose, 
@@ -164,15 +161,12 @@ that script take about 8 minutes to complete, and you can monitor its progress b
 
         tail -f /mnt/var/log/hadoop/steps/s-*/stdout
 
-
 These logs are also stored in s3 at
 
         mlp-demo/elasticmapreduce/$ClusterId/steps/s-something
 
-
 6 The final task in piggyback.sh is to sleep for 15 minutes, after which the cluster auto
 terminates, so if you need to ssh into the master node to debug any issues, you have 15 minutes to do so
-
 
 7 Meanwhile, the launch_cluster script also calls launch_datasci which launches the 
 persistent datasci instance that hosts the jupyter dashboard. Use the AWS console to get
@@ -181,12 +175,10 @@ its public IP and ssh into datasci:
         datasciIP=54.202.212.90
         ssh -i private/datasci.pem hadoop@$datasciIP
 
-
 8 The piggyback and provision_datasci scripts are executed on the datasci instance, with
 provision_datasci setting up the jupyter dashboard, check its logs via
 
         tail -f /mnt/var/log/hadoop/steps/s-*/stdout
-
 
 9 User=jupyter owners the Jupyter session that is running inside a screen session
 on the datasci instance. Use the EC2 console to get that machine's
@@ -194,9 +186,7 @@ public IP and then browse
 
         http://54.202.212.90:8765
 
-
 and enter password=oneoff.
-
 
 10 To clone from (and also push to) this repo, with permissions adjusted so that 
 jupyter can also save its notebooks in a directory owned by user=hadoop:
