@@ -24,10 +24,10 @@ following architecture diagram, which shows how all of these AWS components inte
 (architecture diagram)
 
 Other users are invited to use this template in their own work, and that would require
-_i._ replacing the reference to make_training_data.py (which is called by piggyback.sh
+_(i.)_ replacing the reference to make_training_data.py (which is called by piggyback.sh
 and generates some mock data) and mlp.py (which fits a neural network model to that mock data)
-to your desired Spark computation, (ii.) changing the lines in piggyback.sh that
-export data to your desired folder in S3, and (iii.) adapting the script athena_tables.sh
+to your desired Spark computation, _(ii.)_ changing the lines in piggyback.sh that
+export data to your desired folder in S3, and _(iii.)_ adapting the script athena_tables.sh
 (which lands some Athena table schemas on the S3 folders) to your use-case.
 
 To launch this cluster, first confirm that you satisfy the Requirements that are noted below,
