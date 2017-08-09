@@ -200,7 +200,6 @@ jupyter can also save its notebooks in a directory owned by user=hadoop:
         mkdir private
         aws s3 cp s3://spark-one-off/accessKeys.csv private/accessKeys.csv
 
-
 11 To regenerate the training data on the EMR's master node and store in hdfs:
 
         /emr/miniconda2/bin/python ./make_training_data.py
@@ -208,19 +207,16 @@ jupyter can also save its notebooks in a directory owned by user=hadoop:
         hdfs dfs -mkdir -p data/train
         hdfs dfs -put -f data/train.txt data/train/train.txt
 
-
 12 To train MLP model on the XO dataset & map its decision surface, on master:
 
         logj4="spark.driver.extraJavaOptions=-Dlog4j.configuration=file:./log4j.properties"
         PYSPARK_PYTHON=/emr/miniconda2/bin/python spark-submit --master yarn --conf "$logj4" \
             --num-executors 29 --executor-cores 4 --executor-memory 4G --driver-memory 2G mlp.py
 
-
 13 To export input & output data to s3, on master:
 
         aws s3 rm --recursive s3://spark-one-off/data
         hadoop distcp data s3a://spark-one-off/data
-
 
 14 To rebuild the athena tables, on master:
 
@@ -228,16 +224,13 @@ jupyter can also save its notebooks in a directory owned by user=hadoop:
         aws s3 cp s3://spark-one-off/accessKeys.csv private/accessKeys.csv
         ./athena_tables.sh
 
-
 15 To view any of the cluster's UIs, first establish an ssh tunnel into the master node:
 
         ssh -i private/datasci.pem hadoop@$masterIP -CD 8157
 
-
 Also install the SwitchyOmega extension in chrome and configure per 
 https://www.cloudera.com/documentation/director/2-2-x/topics/director_security_socks.html
 with the contents of pac.script copied into the PAC Script box
-
 
 16 While the mlp.py spark job is executing, you can monitor that job by
 browsing Yarn's resource manager on port 8088 of the master's private IP,
