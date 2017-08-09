@@ -115,13 +115,13 @@ for N_hid in N_hidden:
     grid_pd['x_idx'] = grid_pd['id'] - grid_pd['y_idx']*Nxy
     grid_pd['y'] = (grid_pd['y_idx'] - Nxy/2)*delta
     grid_pd['x'] = (grid_pd['x_idx'] - Nxy/2)*delta
-    grid = spark.createDataFrame(grid_pd[['x', 'y']])
+    grid = spark.createDataFrame(grid_pd[['x', 'y']]).cache()
     
     #generate predictions across the grid
     print 'computing predictions across grid...'
-    grid_assembled = assembler.transform(grid)
+    grid_assembled = assembler.transform(grid).cache()
     grid_assembled.show(5, truncate=False)
-    grid_predict = model.transform(grid_assembled)
+    grid_predict = model.transform(grid_assembled).cache()
     grid_predict.show(5, truncate=False)
     
     #convert numerical predictions into X,O,B

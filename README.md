@@ -9,7 +9,7 @@ git branch=master
 
 Browse the Jupyter dashboard at
 
-        http://54.202.171.18:8765/notebooks/dashboard.ipynb?dashboard
+        http://54.202.254.48:8765/notebooks/dashboard.ipynb?dashboard
 
 
 with password=oneoff
@@ -44,17 +44,17 @@ Then configure aws-cli by adding the following lines to ~/.aws/config on your la
 
 and note the ClusterID that will resemble
 
-        ClusterId=j-2HYQM3XXTEEJP
+        ClusterId=j-GEKI6R5CC8ZZ
 
 
 and browse the cluster's EMR dashboard at
 
-        https://us-west-2.console.aws.amazon.com/elasticmapreduce/home?region=us-west-2#cluster-details:j-2HYQM3XXTEEJP
+        https://us-west-2.console.aws.amazon.com/elasticmapreduce/home?region=us-west-2#cluster-details:j-GEKI6R5CC8ZZ
 
 
 and use that plus the EC2 console to infer the master node's public IP, which will resemble:
 
-        master=54.202.171.18
+        master=54.202.254.48
 
 
 All cluster instances are named oneoff in the AWS/EC2 console.
@@ -106,7 +106,7 @@ jupyter can also save its notebooks in this directory:
 
         logj4="spark.driver.extraJavaOptions=-Dlog4j.configuration=file:./log4j.properties"
         PYSPARK_PYTHON=/emr/miniconda2/bin/python spark-submit --master yarn --conf "$logj4" \
-            --num-executors 15 --executor-cores 4 --executor-memory 3G --driver-memory 3G mlp.py
+            --num-executors 29 --executor-cores 4 --executor-memory 4G --driver-memory 2G mlp.py
 
 
 8 To export input & output data to s3:
@@ -117,6 +117,9 @@ jupyter can also save its notebooks in this directory:
 
 7 To rebuild the athena tables:
 
+        mkdir private
+        aws s3 cp s3://spark-one-off/accessKeys.csv private/accessKeys.csv
+        IFS=, read -r access_key secret_key < <(tail -n1 private/accessKeys.csv)
         ./athena_tables.sh
 
 
@@ -134,7 +137,7 @@ with the contents of pac.script copied into the PAC Script box
 browsing Yarn's resource manager on port 8088 of the master's private IP,
 which will resemble:
 
-        http://10.0.0.13:8088
+        http://10.0.0.223:8088
 
 
 
@@ -142,7 +145,7 @@ which will resemble:
 on the master instance; use the EC2 console to get that machine's
 public IP then browse
 
-        http://54.202.171.18:8765
+        http://54.202.254.48:8765
 
 
 Note that this Jupyter UI is password-protected but visible to the world,

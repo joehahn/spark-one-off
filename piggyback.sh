@@ -30,11 +30,12 @@ hdfs dfs -rm -R -f -skipTrash data
 hdfs dfs -mkdir -p data/train
 hdfs dfs -put -f data/train.txt data/train/train.txt
 
-#use spark to fit mlp model to training data, and map that model's decision surface
+#use spark to fit mlp models to training data, and map those models' decision surfaces
+#executing on four m4.2xlarge instances having 8cpus 32Gb each
 echo 'executing mlp.py...'
 logj4="spark.driver.extraJavaOptions=-Dlog4j.configuration=file:./log4j.properties"
 PYSPARK_PYTHON=/emr/miniconda2/bin/python spark-submit --master yarn --conf "$logj4" \
-    --num-executors 28 --executor-cores 4 --executor-memory 4G --driver-memory 2G mlp.py
+    --num-executors 29 --executor-cores 4 --executor-memory 4G --driver-memory 2G mlp.py
 hdfs dfs -cat data/grid/*.csv | wc
 
 #copy hdfs input & output data to s3
@@ -42,6 +43,16 @@ echo 'copying hdfs data to s3...'
 aws s3 rm --recursive s3://spark-one-off/data
 hadoop distcp data s3a://spark-one-off/data
 aws s3 ls --recursive s3://spark-one-off/data
+
+#get aws access keys from s3, and forward-slash-encode any slashes in the secret key...crap doesnt work :(
+echo "getting aws access keys from s3..."
+mkdir private
+aws s3 cp s3://spark-one-off/accessKeys.csv private/accessKeys.csv
+IFS=, read -r access_key secret_key < <(tail -n1 private/accessKeys.csv)
+#echo $access_key
+#echo $secret_key
+secret_key_encoded="$(echo $secret_key | sed 's/\//\\\//g')"
+#echo $secret_key_encoded
 
 #plop athena table schemas on s3 datasets
 ./athena_tables.sh
@@ -57,7 +68,7 @@ sudo -u jupyter /emr/miniconda2/bin/jupyter notebook --generate-config
 sudo -u jupyter cp jupyter_notebook_config.json /home/jupyter/.jupyter/.
 sudo -u jupyter screen -dmS jupyter_sesh /emr/miniconda2/bin/jupyter notebook --ip 0.0.0.0 --no-browser --port 8765
 
-#update locate's database
+#update locates database
 echo 'updating locate...'
 sudo updatedb
 
