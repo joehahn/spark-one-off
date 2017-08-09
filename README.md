@@ -75,8 +75,8 @@ and then the pyspark code mlp.py trains a Multi Layer Perceptron (MLP) classifie
 on that data. An MLP model is a fairly simple neural network model, and the
 quality of its predictions depends on the number of neurons used
 in the model's hidden layer. To explore this, the mlp.py code actually fits
-10 different neural nets to the training data, these models have 5 < N < 600
-in their neural networks. To determine the optimal number
+10 different neural nets to the training data, and those models use 5 < N < 600 neurons
+in their hidden layers. To determine the optimal number
 of neurons N, the mlp.py code uses these trained MLP classifiers
 to map each model's predicted decision boundaries, and the dashboard shows that N=30
 is the optimal number of neurons in the MLP model's hidden layer.
