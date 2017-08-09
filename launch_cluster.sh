@@ -24,6 +24,9 @@ aws s3 cp bootstrap.sh "s3://$bucket_name/scripts/bootstrap.sh" --profile "$prof
 #copy piggyback script to s3
 aws s3 cp piggyback.sh "s3://$bucket_name/scripts/piggyback.sh" --profile "$profile_str"
 
+#copy provision_datasci script to s3
+aws s3 cp piggyback.sh "s3://$bucket_name/scripts/provision_datasci.sh" --profile "$profile_str"
+
 #copy aws access keys to s3, they will be needed by athena
 aws s3 cp private/accessKeys.csv "s3://$bucket_name/accessKeys.csv" --profile "$profile_str"
 
@@ -69,4 +72,4 @@ aws emr create-cluster \
     --no-termination-protected
 
 #launch the datascience instance
-#./launch_datasci_instance.sh
+./launch_datasci.sh
