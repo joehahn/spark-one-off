@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 #make_training_data.py
-#by Joe Hahn, jhh.datasciences.org, 6 August 2017.
+#by Joe Hahn, jmh.datasciences@gmail.com, 6 August 2017.
 #
 #this python script generates the synthetic xo data that an MLP model
 #will be trained on

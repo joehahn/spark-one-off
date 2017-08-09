@@ -1,11 +1,11 @@
 #!/bin/bash 
 
-#launch_cluster.sh
-#by Joe Hahn, jmh.datasciences@gmail.com, 3 August 2017.
+#launch_datasci.sh
+#by Joe Hahn, jmh.datasciences@gmail.com, 9 August 2017.
 #
-#launch a small EMR cluster 
+#launch the datasci instance that hosts the jupyter dashboard
 #
-#To execute:    ./launch_cluster.sh
+#To execute:    ./launch_datasci.sh
 
 
 #choose aws-cli profile (no dashes plz)
