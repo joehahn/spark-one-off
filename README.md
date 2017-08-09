@@ -24,7 +24,7 @@ following architecture diagram, which shows how all of these AWS components inte
 (architecture diagram)
 
 Other users are invited to use this template in their own work, and that would require
-(i.) replacing the reference to make_training_data.py (which is called by piggyback.sh
+_i._ replacing the reference to make_training_data.py (which is called by piggyback.sh
 and generates some mock data) and mlp.py (which fits a neural network model to that mock data)
 to your desired Spark computation, (ii.) changing the lines in piggyback.sh that
 export data to your desired folder in S3, and (iii.) adapting the script athena_tables.sh
