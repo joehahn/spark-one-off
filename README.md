@@ -21,7 +21,7 @@ Storing output in S3 and terminating the EMR cluster after the Spark job complet
 also keeps compute costs very low. This workflow is also illustrated by the
 following architecture diagram, which shows how all of these AWS components interact:
 
-(architecture diagram)
+![](https://github.com/joehahn/spark-one-off/blob/master/figs/architecture.jpg)
 
 Other users are invited to use this template in their own work, and that would require
 _(i.)_ replacing the references to make_training_data.py (which is called by piggyback.sh
