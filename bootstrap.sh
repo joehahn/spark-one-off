@@ -9,20 +9,22 @@
 
 echo 'running bootstrap.sh...'
 
-#install git
-echo 'installing git...'
-sudo yum install -y git-all
+##download minicoda plus other python libraries
+#echo 'downloading anaconda...'
+#wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
+#chmod +x ./Miniconda2-latest-Linux-x86_64.sh
+#./Miniconda2-latest-Linux-x86_64.sh -b -p /emr/miniconda2
 
-#install and setup locate
-echo 'installing locate...'
-sudo yum install -y mlocate
-sudo updatedb
+#download minicoda plus other python libraries,
+#check https://repo.continuum.io/miniconda/ if you want to bump up the version number
+echo 'downloading anaconda...'
+wget https://repo.continuum.io/miniconda/Miniconda2-4.3.21-Linux-x86_64.sh
+chmod +x ./Miniconda2-*-Linux-x86_64.sh
 
-#install minicoda plus other python libraries
+#install miniconda plus other python libraries
 echo 'installing anaconda...'
-wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
-chmod +x ./Miniconda2-latest-Linux-x86_64.sh
-./Miniconda2-latest-Linux-x86_64.sh -b -p /emr/miniconda2
+./Miniconda2-*-Linux-x86_64.sh -b -p /emr/miniconda2
+echo $(conda --version)
 export PATH=/emr/miniconda2/bin:$PATH
 conda install -y ipython
 conda install -y scipy
@@ -34,7 +36,14 @@ conda install -y jupyter
 conda install -y jupyter_dashboards -c conda-forge
 pip install plotly --upgrade                  #this installs plotly v2.0.6
 pip install PyAthenaJDBC
-#conda install -y -c conda-forge pyspark       #needed for jupyter to talk to pyspark
-#conda install -y -c conda-forge -y awscli
+
+#install git
+echo 'installing git...'
+sudo yum install -y git-all
+
+#install locate
+echo 'installing locate...'
+sudo yum install -y mlocate
+sudo updatedb
 
 echo 'bootstrap.sh done!'
