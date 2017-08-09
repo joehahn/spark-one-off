@@ -193,7 +193,8 @@ for now...
         aws emr terminate-clusters --cluster-ids $ClusterId --profile oneoff
 
 
-After the cluster is terminated then it is safe to delete the s3 bucket:
+and do the same or use the EMR console to kill the datasci instance.
+After the EMR clusters are terminated then it is safe to delete the s3 bucket:
 
         aws s3 rb s3://spark-one-off --force --profile oneoff
 
