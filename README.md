@@ -306,3 +306,4 @@ weakness...wrap a VPN around the datasci instance?
 4 Bash + aws-cli is used to launch, provision, and execute all of the above. Which is kinda
 tedious to develop and debug. I suspect that using ansible would be a better way to do this,
 but I'm not ansible-savvy.
+
