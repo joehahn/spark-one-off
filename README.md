@@ -31,7 +31,7 @@ alter. And the script athena_tables.sh lands some Athena table schemas on those 
 that script would also need to be adapted to your use-case.
 
 To launch this cluster, first confirm that you satisfy the Requirements that are noted below,
-and then execute this launch script
+and then execute
 
         ./launch_cluster.sh
 
@@ -43,7 +43,6 @@ To browse that Jupyter dashboard, first use the AWS EC2 console to determine the
 address of the datasci instance and then browse
 
         http://54.202.212.90:8765/notebooks/dashboard.ipynb?dashboard
-
 
 keeping in mind that you will need to update the IP address in the above URL, and
 log in using password=oneoff.
