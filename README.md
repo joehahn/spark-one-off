@@ -12,7 +12,7 @@ The following uses a suite of bash and python scripts to launch a throwaway EMR 
 in the Amazon AWS cloud. And once that cluster is up and ready, a Spark job is then
 executed in parallel across that cluster's worker nodes. When that Spark job is complete,
 its output is stored in S3 and then the EMR cluster terminates. And while that is happening,
-a persistent datascience instance is also launched in AWSl that datascience instance
+a persistent datascience instance is also launched in AWS; that datascience instance
 hosts a Jupyter dashboard that uses the Athena service to query that S3 data
 and visualize those queries. The purpose of this repo is to provide a template
 for getting  a computation performed in parallel on a throwaway Spark EMR cluster,
