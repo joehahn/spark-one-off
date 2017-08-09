@@ -59,7 +59,11 @@ generates the mock XO dataset:
 
 which also labels each record in the XO dataset as a member of the green X,
 red O, or blue B background classes, depending upon where each record's x,y coordinates
-reside, see dashboard. This training dataset is then stored in HDFS,
+reside, see dashboard.
+
+![](https://github.com/joehahn/spark-one-off/blob/master/figs/xy.png)
+
+This training dataset is then stored in HDFS,
 and then the pyspark code mlp.py trains a Multi Layer Perceptron (MLP) classifier
 on that data. An MLP model is a fairly simple neural network model, and the
 quality of its predictions depends on the number of neurons used
