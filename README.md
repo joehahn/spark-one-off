@@ -307,3 +307,5 @@ weakness...wrap a VPN around the datasci instance?
 tedious to develop and debug. I suspect that using ansible would be a better way to do this,
 but I'm not ansible-savvy.
 
+5 The connection between the Jupyter dashboard and Athena is surprisingly slow, using more
+efficient code will speed up the dashboard's refresh.
