@@ -18,17 +18,17 @@ and visualize those queries. The purpose of this repo is to provide a template
 for getting  a computation performed in parallel on a throwaway Spark EMR cluster,
 exporting output to S3, and then visualizing that output via a persistent Jupyter dashboard.
 Storing output in S3 and terminating the EMR cluster after the Spark job completes
-also keeps compute costs very low. The workflow described here is also illustrated by the
+also keeps compute costs very low. This workflow is also illustrated by the
 following architecture diagram, which shows how all of these AWS components interact:
 
 (architecture diagram)
 
 Other users are invited to use this template in their own work, and that would require
-replacing the reference to make_training_data.py (which is called by piggyback.sh
-and generates some mock data) and mlp.py (which fits a neural network model to that mock data).
-Other lines in piggyback.sh export that data to an S3 folder that you would likely want to
-alter. And the script athena_tables.sh lands some Athena table schemas on those S3 folders,
-that script would also need to be adapted to your use-case.
+(i.) replacing the reference to make_training_data.py (which is called by piggyback.sh
+and generates some mock data) and mlp.py (which fits a neural network model to that mock data)
+to your desired Spark computation, (ii.) changing the lines in piggyback.sh that
+export data to your desired folder in S3, and (iii.) adapting the script athena_tables.sh
+(which lands some Athena table schemas on the S3 folders) to your use-case.
 
 To launch this cluster, first confirm that you satisfy the Requirements that are noted below,
 and then execute
