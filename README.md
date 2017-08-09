@@ -165,8 +165,8 @@ These logs are also stored in s3 at
 
         mlp-demo/elasticmapreduce/$ClusterId/steps/s-something
 
-6 The final task in piggyback.sh is to sleep for 15 minutes, after which the cluster auto
-terminates, so if you need to ssh into the master node to debug any issues, you have 15 minutes to do so
+6 The final task in piggyback.sh is to sleep for 10 minutes, after which the cluster auto
+terminates, so if you need to ssh into the master node to debug any issues, you have 10 minutes to do so
 
 7 Meanwhile, the launch_cluster script also calls launch_datasci which launches the 
 persistent datasci instance that hosts the jupyter dashboard. Use the AWS console to get
