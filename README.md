@@ -98,6 +98,7 @@ jupyter can also save its notebooks in this directory:
 6 To regenerate the training data and store in hdfs:
 
         /emr/miniconda2/bin/python ./make_training_data.py
+        hdfs dfs -rm -R -f -skipTrash data
         hdfs dfs -mkdir -p data/train
         hdfs dfs -put -f data/train.txt data/train/train.txt
 
@@ -119,7 +120,6 @@ jupyter can also save its notebooks in this directory:
 
         mkdir private
         aws s3 cp s3://spark-one-off/accessKeys.csv private/accessKeys.csv
-        IFS=, read -r access_key secret_key < <(tail -n1 private/accessKeys.csv)
         ./athena_tables.sh
 
 
