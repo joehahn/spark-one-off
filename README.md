@@ -30,7 +30,7 @@ to your desired Spark codes, _(ii.)_ changing the lines in piggyback.sh that
 export data to your desired folder in S3, and _(iii.)_ modifying the script athena_tables.sh
 (which lands some Athena table schemas on the S3 folders) for your use-case.
 
-To launch this cluster, first confirm that you satisfy the Requirements that are noted below,
+To launch the throwaway EMR cluster, first confirm that you satisfy the Requirements that are noted below,
 and then execute
 
         ./launch_cluster.sh
