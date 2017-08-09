@@ -49,9 +49,10 @@ log in using password=oneoff. On first visit, refresh that dashboard via
 
         Kernel > Restart & Run All
 
-Refreshing those dashboard plots does unfortunately take about a minute to complete. The bottleneck
-appears to be the PyAthenaJDBC library that is used by the dashboard; replacing that library
-with more efficient code will presumably speed up that dashboard's refresh rate. 
+which unfortunately take about a minute to complete. The bottleneck appears to be the PyAthenaJDBC
+library that the dashboard uses to communicate with Athena; replacing that library with 
+more efficient code will likely speed up that dashboard's refresh rate. To see the
+python code that generates the dashboard's visuals, click View > Notebook.
 
 
 ### Spark Job:
