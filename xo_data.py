@@ -1,5 +1,5 @@
 #make_xo_data.py.py
-#by Joe Hahn, jhahn6@csc.com, 29 June 2017.
+#by Joe Hahn, jmh.datasciences@gmail.com, 6 Aug 2017.
 #
 #helper functions generates the xo dataset
 #
