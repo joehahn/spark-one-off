@@ -38,7 +38,7 @@ keeping in mind that you will need to update the IP address in the above URL, an
 log in using password=oneoff.
 
 
-###Spark Job:
+### Spark Job:
 
 This repo's main goal is to template the workflow described above: have Spark perform
 a computation on an EMR cluster and export its output to S3 where it is later
@@ -64,7 +64,7 @@ to map their predicted decision boundaries, and the dashboard shows that N=30
 is the optimal number of neurons in the hidden layer.
 
 
-###Requiremments:
+### Requiremments:
 
 Launching the EMR cluster will require the following:
 
@@ -82,7 +82,7 @@ to view this demoo's dashboards.
 
 
 
-###Technical Notes:
+### Technical Notes:
 
 The following notes will be useful to those wishing to dig deeper:
 
@@ -298,7 +298,7 @@ After the EMR clusters are terminated then it is safe to delete the s3 bucket:
 and use AWS > Athena > Catalog Manager > drop the oneoff database.
 
 
-###Known Issues:
+### Known Issues:
 
 1 To launch the datasci instance, the aws-cli command "aws emr create-cluster" is used to create
 a single-node emr cluster. For convenience only, since that easily gets the bootstrap and
