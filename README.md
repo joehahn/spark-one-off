@@ -5,7 +5,7 @@ jmh.datasciences@gmail.com,<br />
 3 August 2017<br />
 git branch=master
 
-###Intro:
+### Intro:
 
 
 The following uses a suite of bash and python scripts to launch a throwaway EMR cluster
