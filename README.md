@@ -297,7 +297,7 @@ to do so...
 2 My AWS secret key is hard-coded into athena_tables.sh. This is a consequence of not
 having good enough bash-fu to deal with keys that have special characters (+/) in them,
 this is insecure and needs to be fixed... Fortunately my access key is not exposed in this
-repo, so this issue is not a total disaster.
+repo, so this issue is only a partial rather than total security fail...
 
 3 The jupyter dashboard is protected only by a weak password. Note that Jupyter also gives
 viewers commandline access to the datasci node. I don't know how to fix this particular security
