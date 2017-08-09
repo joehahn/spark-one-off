@@ -292,7 +292,7 @@ After the EMR clusters are terminated then it is safe to delete the s3 bucket:
         aws s3 rb s3://spark-one-off --force --profile oneoff
 
 
-and use AWS > Athena > Catalog Manager > drop the oneoff database.
+and use AWS > Athena > Catalog Manager to drop the oneoff database.
 
 
 ### Known Issues:
