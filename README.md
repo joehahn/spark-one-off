@@ -238,11 +238,9 @@ which will resemble:
 
         http://10.0.0.174:8088
 
-
 Note that this Jupyter UI is password-protected but visible to the world,
 and this process is owned by user=jupyter who does not have sudo privledges. Not good practice for
 production work, but is ok for a demo running on a throwaway instance.
-
 
 17 To construct the launch_cluster.sh script, first build the EMR cluster manually via
 AWS console > EMR > Advanced options using these settings:
@@ -260,33 +258,27 @@ AWS console > EMR > Advanced options using these settings:
     Tag: Name=spark-one-off
     ec2 key pair=datasci
 
-
 Then click AWS CLI export, copy to launch_cluster.sh, and then adapt. To enable ssh access,
 use the EC2 console to add this inbound rule to the ElasticMapReduce-master security group: 
 
         ssh, tcp, 22, anywhere
 
-
 and then add this rule to the same security group:
 
         custom tcp, tcp, 8765, anywhere
-
 
 to allow anyone to browse the cluster's password-protected Jupyter UI from anywhere.
 Opening port 8765 to the world is not best practice, but will have to be good enuf
 for now...
 
-
 18 To terminate this cluster using laptop's aws-cli:
 
         aws emr terminate-clusters --cluster-ids $ClusterId --profile oneoff
-
 
 and do the same or use the EMR console to kill the datasci instance.
 After the EMR clusters are terminated then it is safe to delete the s3 bucket:
 
         aws s3 rb s3://spark-one-off --force --profile oneoff
-
 
 and use AWS > Athena > Catalog Manager to drop the oneoff database.
 
