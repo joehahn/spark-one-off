@@ -140,9 +140,9 @@ Use that dashboard plus the EC2 console to infer the master node's public IP, wh
 All cluster instances are named oneoff in the AWS/EC2 console.
 This cluster will cycle through Starting and Bootstrapping phases
 (during which is the EMR cluster launches, fires up Hadoop, and then installs additional libraries),
-then Running (where a Spark code is executed in parallel across the cluster's 4 worker nodes,
-this is the code that fits a predictive neural network model to the data),
-then Terminating (here the cluster is automatically shut down after demo output is stored in S3).
+then Running (where the Spark code mlp.py is executed in parallel across the cluster's 4 worker nodes,
+this is the code that fits the predictive neural network model to the mock data),
+then Terminating (here the cluster is automatically shut down after the output is stored in S3).
 
 If you want this cluster to persist rather than terminate, change --auto-terminate in
 launch_cluster.sh to --no-auto-terminate
