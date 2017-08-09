@@ -25,6 +25,13 @@ shows how all of these AWS components interact:
 
 (architecture diagram)
 
+Other users are invited to use this template in their own work, and that would require
+replacing the reference to make_training_data.py (which is called by piggyback.sh
+and generates some mock data) and mlp.py (which fits a neural network model to that mock data).
+Other lines in piggyback.sh export that data to an S3 folder that you would likely want to
+alter. And the script athena_tables.sh lands some Athena table schemas on those S3 folders,
+that script would also need to be adapted to your use-case.
+
 To launch this cluster, first confirm that you satisfy the Requirements that are noted below,
 and then execute this launch script
 
