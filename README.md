@@ -43,7 +43,7 @@ log in using password=oneoff.
 This repo's main goal is to template the workflow described above: have Spark perform
 a computation on an EMR cluster and export its output to S3 where it is later
 be queried and visualized by a Jupyter dashboard. Having the EMR cluster terminate after
-the spark job completes, and storing output in S3, also keeps compute costs very low.
+the spark job completes, with its output stored in S3, also keeps compute costs very low.
 
 This line in the piggyback script generates the mock XO dataset:
 
@@ -55,13 +55,13 @@ red O, or blue B background classes, depending upon where each record's x,y coor
 reside, see dashboard. This training dataset is then stored in HDFS,
 and then the pyspark code mlp.py trains a Multi Layer Perceptron (MLP) classifier
 on that data. An MLP model is a fairly simple neural network model, and the
-quality of its predictions depends on the number of neurons that are used
+quality of its predictions depends on the number of neurons used
 in the model's hidden layer. To explore this, the mlp.py code actually fits
 10 different neural nets to the training data, these models have 5 < N < 600
 in their neural networks. To determine the optimal number
-of neurons N, the mlp.py code uses these trained MLP classifiers'
-to map their predicted decision boundaries, and the dashboard shows that N=30
-is the optimal number of neurons in the hidden layer.
+of neurons N, the mlp.py code uses these trained MLP classifiers
+to map each model's predicted decision boundaries, and the dashboard shows that N=30
+is the optimal number of neurons in the MLP model's hidden layer.
 
 
 ### Requiremments:
