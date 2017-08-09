@@ -15,6 +15,23 @@ Browse the Jupyter dashboard at
 with password=oneoff
 
 
+###Requiremments:
+
+Launching the EMR cluster will require the following:
+
+- You have access to an AWS account with sufficient permission to launch EC2 instances,
+write data to S3, and execute Athena queries.
+
+- The following presumes that all other confidential info (ssh and aws keys etc) are
+stored locally on your laptop in the private folder and not pushed to this github repo.
+Your AWS access keys should be stored in file private/accessKeys.csv
+
+- Anaconda python and aws-cli are installed and configured on your laptop per Notes #1, below.
+
+Note that after the following successfully executes once, only a browser is needed
+to view this demoo's dashboards.
+
+
 ###Technical Notes:
 
 The following notes will be useful to those wishing to dig deeper:
