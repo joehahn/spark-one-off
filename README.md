@@ -74,6 +74,7 @@ of neurons N, the mlp.py code uses these trained MLP classifiers
 to map each model's predicted decision boundaries, and the dashboard shows that N=30
 is the optimal number of neurons in the MLP model's hidden layer.
 
+![](https://github.com/joehahn/spark-one-off/blob/master/figs/decision_surface.png)
 
 ### Requiremments:
 
