@@ -14,8 +14,14 @@ executed in parallel across that cluster's worker nodes. When that Spark job is 
 its output is stored in S3, and then the EMR cluster terminates. And while this is happening,
 a persistent datascience instance is also launched in AWS, that datascience instance
 hosts a Jupyter dashboard that uses the Athena service to query that S3 data
-and visualize those queries. The architecture diagram (below) shows how all of these
-AWS components interact:
+and visualize those queries. The purpose of this repo is to provide a template
+for getting  a computation performed in parallel on a throwaway Spark EMR cluster,
+exporting output to S3, and then visualizing that output via a persistent Jupyter dashboard.
+Having the EMR cluster terminate after the spark job completes, with its output stored in S3,
+also keeps compute costs very low.
+
+The above workflow is also illustrated by the following architecture diagram, which
+shows how all of these AWS components interact:
 
 (architecture diagram)
 
