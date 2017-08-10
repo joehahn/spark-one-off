@@ -15,9 +15,9 @@ sudo cp AthenaJDBC41-1.1.0.jar /usr/lib/spark/jars/.
 #read s3 access & secret keys
 IFS=, read -r access_key secret_key < <(tail -n1 private/accessKeys.csv)
 
-#check connection string...dammit I cant get secret_key_encoded passed to athena due to the / or +
-#in the secret key...am punting by hard-coding the secret_key into connect_str bad bad bad!!!
-connect_str="jdbc:awsathena://athena.us-west-2.amazonaws.com:443?s3_staging_dir=s3://spark-one-off/athena/&user=$access_key&password=iGpon+WNmDDxhI2CtCoIUHCqzAZAQ0q4QBgM7Wm3"
+#check connection string
+#ensure that your secret key has no + or / in it or the following will fail
+connect_str="jdbc:awsathena://athena.us-west-2.amazonaws.com:443?s3_staging_dir=s3://spark-one-off/athena/&user=$access_key&password=$secret_key"
 echo "JDBC connection string:"
 echo $connect_str
 /usr/lib/spark/bin/beeline -u "$connect_str" -e "show databases"

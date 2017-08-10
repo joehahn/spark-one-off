@@ -68,10 +68,10 @@ aws s3 cp s3://spark-one-off/accessKeys.csv private/accessKeys.csv
 echo 'updating locate...'
 sudo updatedb
 
-#sleep for 15 minutes, then cluster terminates
-echo 'piggyback sleeping for 15 minutes...'
+#sleep for 10 minutes, then cluster terminates
+echo 'piggyback sleeping for 10 minutes...'
 echo $(date)
-sleep 900
+sleep 600
 echo $(date)
 
 #done
