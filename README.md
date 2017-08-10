@@ -42,7 +42,7 @@ visualizes that output.
 To browse that Jupyter dashboard, first use the AWS EC2 console to determine the public IP
 address of the datasci instance and then browse
 
-        http://54.202.212.90:8765/notebooks/dashboard.ipynb?dashboard
+        http://54.202.217.13:8765/notebooks/dashboard.ipynb?dashboard
 
 keeping in mind that you will need to update the IP address in the above URL, and
 log in using password=oneoff. On first visit, refresh that dashboard via
@@ -93,7 +93,8 @@ write data to S3, and execute Athena queries.
 
 - The following presumes that all other confidential info (ssh and aws keys etc) is
 stored locally on your laptop in the private folder and not pushed to this github repo.
-Your AWS access keys should be stored in file private/accessKeys.csv
+Your AWS access keys should be stored in file private/accessKeys.csv and should not
+contain any special +/ characters.
 
 - Anaconda python and aws-cli are installed and configured on your laptop per Notes #1, below.
 
@@ -127,15 +128,15 @@ Then configure aws-cli by adding the following lines to ~/.aws/config on your la
 and note the two ClusterIDs reported, the first ClusterID is for the EMR cluster where the spark job
 will be executed, that ClusterID will resemble
 
-        ClusterId=j-BS4RH7H8YON6
+        ClusterId=j-32KZHQQOQY2GW
 
 and is used to browse the EMR cluster's dashboard at
 
-        https://us-west-2.console.aws.amazon.com/elasticmapreduce/home?region=us-west-2#cluster-details:j-BS4RH7H8YON6
+        https://us-west-2.console.aws.amazon.com/elasticmapreduce/home?region=us-west-2#cluster-details:j-32KZHQQOQY2GW
 
 Use that dashboard plus the EC2 console to infer the master node's public IP, which will resemble:
 
-        masterIP=54.244.33.196
+        masterIP=34.210.89.140
 
 All cluster instances are named oneoff in the AWS/EC2 console.
 This cluster will cycle through Starting and Bootstrapping phases
@@ -172,7 +173,7 @@ terminates, so if you need to ssh into the master node to debug any issues, you 
 persistent datasci instance that hosts the jupyter dashboard. Use the AWS console to get
 its public IP and ssh into datasci:
 
-        datasciIP=54.202.212.90
+        datasciIP=54.202.217.13
         ssh -i private/datasci.pem hadoop@$datasciIP
 
 8 The piggyback and provision_datasci scripts are executed on the datasci instance, with
@@ -184,7 +185,7 @@ provision_datasci setting up the jupyter dashboard, check its logs via
 on the datasci instance. Use the EC2 console to get that machine's
 public IP and then browse
 
-        http://54.202.212.90:8765
+        http://54.202.217.13
 
 and enter password=oneoff.
 
@@ -236,7 +237,7 @@ with the contents of pac.script copied into the PAC Script box
 browsing Yarn's resource manager on port 8088 of the master's private IP,
 which will resemble:
 
-        http://10.0.0.174:8088
+        http://10.0.0.94:8088
 
 Note that this Jupyter UI is password-protected but visible to the world,
 and this process is owned by user=jupyter who does not have sudo privledges. Not good practice for
@@ -294,10 +295,7 @@ this new instance how to use the desired subnet and security groups and execute 
 I'm sure that it is straightforward to launch this instance correctly, but I myself don't know how
 to do so...
 
-2 My AWS secret key is hard-coded into athena_tables.sh. This is a consequence of not
-having good enough bash-fu to deal with keys that have special characters (+/) in them,
-this is insecure and needs to be fixed... Fortunately my access key is not exposed in this
-repo, so this issue is only a partial rather than total security fail...
+2 athena_tables.sh will barf if your aws access keys contain special characters +/
 
 3 The jupyter dashboard is protected only by a weak password. Note that Jupyter also gives
 viewers commandline access to the datasci node. I don't know how to fix this particular security
