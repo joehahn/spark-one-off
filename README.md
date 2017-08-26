@@ -309,5 +309,6 @@ but I'm not ansible-savvy.
 efficient code will speed up the dashboard's refresh.
 
 6 Jupyter might complain about being unable to write a checkpoint file, those warnings can be
-ignored, but it would be nice to fix this issue.
+ignored, but it would be nice to fix this issue. Using conda to install specific conda
+versions (rather than latest version) will avert these kind of future issues.
 
