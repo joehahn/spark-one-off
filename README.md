@@ -307,3 +307,7 @@ but I'm not ansible-savvy.
 
 5 The connection between the Jupyter dashboard and Athena is surprisingly slow, using more
 efficient code will speed up the dashboard's refresh.
+
+6 Jupyter might complain about being unable to write a checkpoint file, those warnings can be
+ignored.
+
