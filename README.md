@@ -162,9 +162,9 @@ that script take about 8 minutes to complete, and you can monitor its progress b
 
         tail -f /mnt/var/log/hadoop/steps/s-*/stdout
 
-These logs are also stored in s3 at
+These logs are also stored in this s3 folder:
 
-        mlp-demo/elasticmapreduce/$ClusterId/steps/s-something
+        oneoff/elasticmapreduce/$ClusterId/steps/s-something
 
 6 The final task in piggyback.sh is to sleep for 10 minutes, after which the cluster auto
 terminates, so if you need to ssh into the master node to debug any issues, you have 10 minutes to do so
