@@ -9,12 +9,6 @@
 
 echo 'running bootstrap.sh...'
 
-##download minicoda plus other python libraries
-#echo 'downloading anaconda...'
-#wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
-#chmod +x ./Miniconda2-latest-Linux-x86_64.sh
-#./Miniconda2-latest-Linux-x86_64.sh -b -p /emr/miniconda2
-
 #download minicoda plus other python libraries,
 #check https://repo.continuum.io/miniconda/ if you want to bump up the version number
 echo 'downloading anaconda...'
