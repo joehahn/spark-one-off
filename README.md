@@ -309,5 +309,5 @@ but I'm not ansible-savvy.
 efficient code will speed up the dashboard's refresh.
 
 6 Jupyter might complain about being unable to write a checkpoint file, those warnings can be
-ignored.
+ignored, but it would be nice to fix this issue.
 
