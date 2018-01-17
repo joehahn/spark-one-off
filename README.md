@@ -23,6 +23,10 @@ following architecture diagram, which shows how all of these AWS components inte
 
 ![](https://github.com/joehahn/spark-one-off/blob/master/figs/architecture.jpg)
 
+try #2 
+
+![ScreenShot](https://github.com/joehahn/spark-one-off/blob/master/figs/architecture.jpg)
+
 blah
 
 <p align="center">
