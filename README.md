@@ -23,7 +23,7 @@ following architecture diagram, which shows how all of these AWS components inte
 
 ![](https://github.com/joehahn/spark-one-off/blob/master/figs/architecture.jpg)
 
-![Wireframe001](figs/architecture.jpg?raw=true "Wireframe001")
+![click for architecture digram](figs/architecture.jpg?raw=true)
 
 
 Other users are invited to use this template in their own work, and that would require
