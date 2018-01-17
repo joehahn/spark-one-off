@@ -25,7 +25,7 @@ following architecture diagram, which shows how all of these AWS components inte
 
 blah
 
-[[https://github.com/joehahn/spark-one-off/blob/master/figs/architecture.jpg|alt=octocat]]
+[[https://github.com/joehahn/spark-one-off/blob/master/figs/architecture.jpg]]
 
 Other users are invited to use this template in their own work, and that would require
 _(i.)_ replacing the references to make_training_data.py (which is called by piggyback.sh
