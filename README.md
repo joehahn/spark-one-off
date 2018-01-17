@@ -22,18 +22,7 @@ also keeps compute costs very low. This workflow is also illustrated by the
 following architecture diagram, which shows how all of these AWS components interact:
 
 ![](https://github.com/joehahn/spark-one-off/blob/master/figs/architecture.jpg)
-
-try #2 
-
-![ScreenShot](https://github.com/joehahn/spark-one-off/blob/master/figs/architecture.jpg)
-
-blah
-
-<p align="center">
-  <img src="figs/architecture.jpg" width="350"/>
-</p>
-
-[logo]: figs/architecture.jpg
+![](https://github.com/joehahn/spark-one-off/figs/architecture.jpg)
 
 
 Other users are invited to use this template in their own work, and that would require
