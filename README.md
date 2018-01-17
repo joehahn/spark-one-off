@@ -21,8 +21,6 @@ Storing output in S3 and terminating the EMR cluster after the Spark job complet
 also keeps compute costs very low. This workflow is also illustrated by the
 following architecture diagram, which shows how all of these AWS components interact:
 
-![](https://github.com/joehahn/spark-one-off/blob/master/figs/architecture.jpg)
-
 ![link to architecture digram](figs/architecture.jpg?raw=true)
 
 
@@ -72,6 +70,8 @@ red O, or blue B background classes, depending upon where each record's x,y coor
 reside, see dashboard.
 
 ![](https://github.com/joehahn/spark-one-off/blob/master/figs/xy.png)
+![link to XO plot](figs/xy.png?raw=true)
+
 
 This training dataset is then stored in HDFS,
 and then the pyspark code mlp.py trains a Multi Layer Perceptron (MLP) classifier
