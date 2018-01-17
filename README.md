@@ -23,6 +23,11 @@ following architecture diagram, which shows how all of these AWS components inte
 
 ![](https://github.com/joehahn/spark-one-off/blob/master/figs/architecture.jpg)
 
+blah
+
+![Alt text](figs/architecture.png?raw=true "Title")
+
+
 Other users are invited to use this template in their own work, and that would require
 _(i.)_ replacing the references to make_training_data.py (which is called by piggyback.sh
 and generates some mock data) and mlp.py (which fits a neural network model to that mock data)
