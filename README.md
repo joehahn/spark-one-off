@@ -25,8 +25,7 @@ following architecture diagram, which shows how all of these AWS components inte
 
 blah
 
-![Alt text](figs/architecture.png?raw=true "Title")
-
+![What is this](figs/architecture.jpg)
 
 Other users are invited to use this template in their own work, and that would require
 _(i.)_ replacing the references to make_training_data.py (which is called by piggyback.sh
