@@ -33,6 +33,9 @@ blah
   <img src="figs/architecture.jpg" width="350"/>
 </p>
 
+[logo]: figs/architecture.jpg
+
+
 Other users are invited to use this template in their own work, and that would require
 _(i.)_ replacing the references to make_training_data.py (which is called by piggyback.sh
 and generates some mock data) and mlp.py (which fits a neural network model to that mock data)
