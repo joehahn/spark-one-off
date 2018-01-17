@@ -70,7 +70,6 @@ red O, or blue B background classes, depending upon where each record's x,y coor
 reside, see dashboard.
 
 ![](https://github.com/joehahn/spark-one-off/blob/master/figs/xy.png)
-![link to XO plot](figs/xy.png?raw=true)
 
 
 This training dataset is then stored in HDFS,
